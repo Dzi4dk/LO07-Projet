@@ -1,5 +1,5 @@
 
-<!-- ----- debut ModelVin -->
+<!-- ----- debut ModelBanque -->
 
 <?php
 require_once 'Model.php';
@@ -204,4 +204,4 @@ class ModelBanque {
  
 }
 ?>
-<!-- ----- fin ModelVin -->
+<!-- ----- fin ModelBanque -->

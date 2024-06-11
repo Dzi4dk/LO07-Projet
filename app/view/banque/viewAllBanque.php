@@ -38,7 +38,7 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
   </div>
   <?php include $root . '/app/view/fragment/fragmentCaveFooter.html'; ?>
 
-  <!-- ----- fin viewAll -->
+  <!-- ----- fin viewAllBanque -->
   
   
   
