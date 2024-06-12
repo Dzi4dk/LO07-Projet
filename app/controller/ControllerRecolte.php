@@ -1,5 +1,5 @@
 
-<!-- ----- debut ControllerProducteur -->
+<!-- ----- debut ControllerRecolte -->
 <?php
 require_once '../model/ModelRecolte.php';
 
@@ -123,6 +123,6 @@ class ControllerRecolte {
  
 }
 ?>
-<!-- ----- fin ControllerProducteur -->
+<!-- ----- fin ControllerRecolte -->
 
 

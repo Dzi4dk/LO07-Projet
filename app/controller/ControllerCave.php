@@ -1,5 +1,5 @@
 
-<!-- ----- debut ControllerVin -->
+<!-- ----- debut ControllerCave -->
 <?php
 require_once '../model/ModelVin.php';
 
@@ -27,6 +27,6 @@ class ControllerCave {
  
 }
 ?>
-<!-- ----- fin ControllerVin -->
+<!-- ----- fin ControllerCave -->
 
 
