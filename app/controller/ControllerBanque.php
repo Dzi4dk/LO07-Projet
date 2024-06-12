@@ -46,9 +46,7 @@ class ControllerBanque {
 
     // --- Ajouter une nouvelle banque à la base de données
     public static function banqueCreated($args) {
-        $label = htmlspecialchars($args['label']);
-        $pays = htmlspecialchars($args['pays']);
-        $results = ModelBanque::insert($label, $pays);
+        $results = ModelBanque::insert(htmlspecialchars($_GET['label']), htmlspecialchars($_GET['pays']));
         // ----- Construction chemin de la vue
         include 'config.php';
         $vue = $root . '/app/view/banque/viewInsertedBanque.php';

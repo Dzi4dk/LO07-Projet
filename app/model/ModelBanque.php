@@ -55,22 +55,43 @@ class ModelBanque {
    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
    return NULL;
   }
- }
+ } 
+ 
+public static function getOne($id) {
+  try {
+    $database = Model::getInstance();
+    $query = "SELECT * FROM banque WHERE id = :id";
+    $statement = $database->prepare($query);
+    $statement->execute(['id' => $id]);
+    $result = $statement->fetch(PDO::FETCH_ASSOC); // Utilisez FETCH_ASSOC ou FETCH_OBJ
+    return $result;
+  } catch (PDOException $e) {
+    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+    return NULL;
+  }
+}
 
- 
- 
  
  // Ajouter une nouvelle banque
  public static function insert($label, $pays) {
   try {
    $database = Model::getInstance();
-   $query = "INSERT INTO banque (label, pays) VALUES (:label, :pays)";
+   
+   // recherche de la valeur de la clé = max(id) + 1
+   $query = "select max(id) from banque";
+   $statement = $database->query($query);
+   $tuple = $statement->fetch();
+   $id = $tuple['0'];
+   $id++;
+   
+   
+   $query = "INSERT INTO banque value (:label, :pays)";
    $statement = $database->prepare($query);
    $statement->execute([
     'label' => $label,
     'pays' => $pays
    ]);
-   return $database->lastInsertId();
+   return $id;
   } catch (PDOException $e) {
    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
    return NULL;
