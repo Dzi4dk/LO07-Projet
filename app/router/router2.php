@@ -1,10 +1,10 @@
-
 <!-- ----- debut Router2 -->
 <?php
 require ('../controller/ControllerVin.php');
 require ('../controller/ControllerProducteur.php');
 require ('../controller/ControllerCave.php');
 require ('../controller/ControllerRecolte.php');
+require ('../controller/ControllerBanque.php');
 
 // --- récupération de l'action passée dans l'URL
 $query_string = $_SERVER['QUERY_STRING'];
@@ -16,7 +16,7 @@ parse_str($query_string, $param);
 // --- $action contient le nom de la méthode statique recherchée
 $action = htmlspecialchars($param["action"]);
 
-//Modif routeur pour prendre en compte l'ensemble des parametres
+// Modif routeur pour prendre en compte l'ensemble des parametres
 $action = $param['action'];
 
 // --- On supprime l'élément action de la structure
@@ -27,50 +27,57 @@ $args = $param;
 
 // --- Liste des méthodes autorisées
 switch ($action) {
-    //Vin
- case "vinReadAll" :
- case "vinReadOne" :
- case "vinReadId" :
- case "vinCreate" :
- case "vinCreated" :
- case "vinDeleted" :
-     
-  ControllerVin::$action($args);
-  break;
-  
-     //Producteur
- case "prodReadAll" :
- case "prodReadOne" :
- case "prodReadId" :
- case "prodCreate" :
- case "prodCreated" :
- case "prodReadAllRegion" :
- case "prodReadAllRegionProd" :
- case "prodDeleted" :
+    // Vin
+ case "vinReadAll":
+ case "vinReadOne":
+ case "vinReadId":
+ case "vinCreate":
+ case "vinCreated":
+ case "vinDeleted":
+     ControllerVin::$action($args);
+     break;
 
-  ControllerProducteur::$action($args);
-  break;
+    // Producteur
+ case "prodReadAll":
+ case "prodReadOne":
+ case "prodReadId":
+ case "prodCreate":
+ case "prodCreated":
+ case "prodReadAllRegion":
+ case "prodReadAllRegionProd":
+ case "prodDeleted":
+     ControllerProducteur::$action($args);
+     break;
 
-     //Recolte
- case "recolteReadAll" :
- case "recolteReadAllinfos" :    
- case "recolteCreate" :  
- case "recolteCreated" :     
+    // Recolte
+ case "recolteReadAll":
+ case "recolteReadAllinfos":
+ case "recolteCreate":
+ case "recolteCreated":
+     ControllerRecolte::$action($args);
+     break;
 
-  ControllerRecolte::$action($args);
-  break;
+    // Propositions
+ case "mesPropositions":
+     ControllerCave::$action($args);
+     break;
 
-     //Propostions
- case "mesPropositions" :
-     
-  ControllerCave::$action($args);
-  break;
+    // Banque
+ case "banqueReadAll":
+ case "banqueReadOne":
+ case "banqueCreate":
+ case "banqueCreated":
+ case "banqueUpdate":
+ case "banqueUpdated":
+ case "banqueDelete":
+ case "banqueDeleted":
+     ControllerBanque::$action($args);
+     break;
 
- // Tache par défaut
+    // Tache par défaut
  default:
-  $action = "caveAccueil";
-  ControllerCave::$action($args);
+     $action = "caveAccueil";
+     ControllerCave::$action($args);
 }
 ?>
 <!-- ----- Fin Router2 -->
-

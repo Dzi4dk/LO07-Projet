@@ -1,109 +1,94 @@
-
 <!-- ----- debut ControllerBanque -->
 <?php
 require_once '../model/ModelBanque.php';
 
 class ControllerBanque {
- // --- page d'acceuil
- public static function caveAccueil() {
-  include 'config.php';
-  $vue = $root . '/app/view/viewCaveAccueil.php';
-  if (DEBUG)
-   echo ("ControllerProducteur : caveAccueil : vue = $vue");
-  require ($vue);
- }
+    // --- page d'accueil
+    public static function caveAccueil() {
+        include 'config.php';
+        $vue = $root . '/app/view/viewCaveAccueil.php';
+        if (DEBUG)
+            echo ("ControllerBanque : caveAccueil : vue = $vue");
+        require ($vue);
+    }
 
- // --- Liste des banques
- public static function banqueReadAll() {
-  $results = ModelBanque::getAll();
-  $deleted = 0;
-  // ----- Construction chemin de la vue
-  include 'config.php';
-  $vue = $root . '/app/view/banque/viewAllBanque.php';
-  if (DEBUG)
-   echo ("ControllerBanque : banqueReadAll : vue = $vue");
-  require ($vue);
- }
+    // --- Liste des banques
+    public static function banqueReadAll() {
+        $results = ModelBanque::getAll();
+        // ----- Construction chemin de la vue
+        include 'config.php';
+        $vue = $root . '/app/view/banque/viewAllBanque.php';
+        if (DEBUG)
+            echo ("ControllerBanque : banqueReadAll : vue = $vue");
+        require ($vue);
+    }
 
- // Affiche un formulaire pour sélectionner un id qui existe
- public static function prodReadId($args) {
-  $results = ModelProducteur::getAllId();
+    
+    
+    // --- Lire une banque par ID
+    public static function banqueReadOne($args) {
+        $id = $args['id'];
+        $results = ModelBanque::getOne($id);
+        // ----- Construction chemin de la vue
+        include 'config.php';
+        $vue = $root . '/app/view/banque/viewOneBanque.php';
+        if (DEBUG)
+            echo ("ControllerBanque : banqueReadOne : vue = $vue");
+        require ($vue);
+    }
 
-  $target = $args['target'];
-  // ----- Construction chemin de la vue
-  include 'config.php';
-  $vue = $root . '/app/view/prod/viewIdProd.php';
-  require ($vue);
- }
+    // --- Formulaire pour créer une nouvelle banque
+    public static function banqueCreate() {
+        include 'config.php';
+        $vue = $root . '/app/view/banque/viewInsertBanque.php';
+        require ($vue);
+    }
 
- // Affiche un producteur particulier (nom)
- public static function prodReadOne() {
-  $prod_id = $_GET['id'];
-  $results = ModelProducteur::getOne($prod_id);
-  $deleted = 0;
-  
-  // ----- Construction chemin de la vue
-  include 'config.php';
-  $vue = $root . '/app/view/prod/viewAllProd.php';
-  require ($vue);
- }
+    // --- Ajouter une nouvelle banque à la base de données
+    public static function banqueCreated($args) {
+        $label = htmlspecialchars($args['label']);
+        $pays = htmlspecialchars($args['pays']);
+        $results = ModelBanque::insert($label, $pays);
+        // ----- Construction chemin de la vue
+        include 'config.php';
+        $vue = $root . '/app/view/banque/viewInsertedBanque.php';
+        require ($vue);
+    }
 
- // Affiche le formulaire de creation d'un vin
- public static function prodCreate() {
-  // ----- Construction chemin de la vue
-  include 'config.php';
-  $vue = $root . '/app/view/prod/viewInsertProd.php';
-  require ($vue);
- }
+    // --- Formulaire pour mettre à jour une banque
+    public static function banqueUpdate($args) {
+        $id = $args['id'];
+        $results = ModelBanque::getOne($id);
+        // ----- Construction chemin de la vue
+        include 'config.php';
+        $vue = $root . '/app/view/banque/viewUpdateBanque.php';
+        require ($vue);
+    }
 
- // Affiche un formulaire pour récupérer les informations d'un nouveau producteur.
- // La clé est gérée par le systeme et pas par l'internaute
- public static function prodCreated() {
-  // ajouter une validation des informations du formulaire
-  $results = ModelProducteur::insert(
-      htmlspecialchars($_GET['nom']), htmlspecialchars($_GET['prenom']), htmlspecialchars($_GET['region'])
-  );
-  // ----- Construction chemin de la vue
-  include 'config.php';
-  $vue = $root . '/app/view/prod/viewInsertedProd.php';
-  require ($vue);
- }
- 
-  // --- Liste des vins
- public static function prodReadAllRegion() {
-  $results = ModelProducteur::getAllRegion();
-  // ----- Construction chemin de la vue
-  include 'config.php';
-  $vue = $root . '/app/view/prod/viewAllProdRegion.php';
-  if (DEBUG)
-   echo ("ControllerProducteur : prodReadAllRegion : vue = $vue");
-  require ($vue);
- }
- 
- public static function prodReadAllRegionProd() {
-  $results = ModelProducteur::getAllRegionProd();
-  // ----- Construction chemin de la vue
-  include 'config.php';
-  $vue = $root . '/app/view/prod/viewAllProdRegionProd.php';
-  if (DEBUG)
-   echo ("ControllerProducteur : prodReadAllRegionProd : vue = $vue");
-  require ($vue);
- }
- 
- // Supprime et affiche un vin particulier (id)
- public static function prodDeleted() {
-  $prod_id = $_GET['id'];
-  $results = ModelProducteur::getOne($prod_id);
-  $deleted = ModelProducteur::delete($prod_id);
+    // --- Mettre à jour une banque dans la base de données
+    public static function banqueUpdated($args) {
+        $id = htmlspecialchars($args['id']);
+        $label = htmlspecialchars($args['label']);
+        $pays = htmlspecialchars($args['pays']);
+        $results = ModelBanque::update($id, $label, $pays);
+        // ----- Construction chemin de la vue
+        include 'config.php';
+        $vue = $root . '/app/view/banque/viewUpdatedBanque.php';
+        require ($vue);
+    }
 
-  // ----- Construction chemin de la vue
-  include 'config.php';
-  $vue = $root . '/app/view/prod/viewAllProd.php';
-  require ($vue);
- }
- 
+    // --- Supprimer une banque
+    public static function banqueDelete($args) {
+        $id = $args['id'];
+        $results = ModelBanque::delete($id);
+        // ----- Construction chemin de la vue
+        include 'config.php';
+        $vue = $root . '/app/view/banque/viewDeletedBanque.php';
+        require ($vue);
+    }
 }
 ?>
-<!-- ----- fin ControllerProducteur -->
+<!-- ----- Fin ControllerBanque -->
+
 
 

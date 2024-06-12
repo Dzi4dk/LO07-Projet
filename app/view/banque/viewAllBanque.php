@@ -21,16 +21,19 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
       </thead>
       <tbody>
           <?php
-          // La liste des vins est dans une variable $results             
+          // La liste des banques est dans une variable $results             
           foreach ($results as $element) {
            printf("<tr><td>%d</td><td>%s</td><td>%s</td></tr>", $element->getId(), $element->getLabel(), 
              $element->getPays());
           }
-          if ($deleted == 1){
-              echo ("Le producteur ci dessus a bien été supprimé");
-          } 
-          elseif ($deleted == 2) {
-              echo ("Le producteur ci dessus n'a pas été supprimé, il est présent dans une récolte");          
+          
+          // Affichage des messages de suppression si nécessaire
+          if (isset($deleted)) {
+              if ($deleted == 1) {
+                  echo ("<tr><td colspan='3'>La banque ci-dessus a bien été supprimée.</td></tr>");
+              } elseif ($deleted == 2) {
+                  echo ("<tr><td colspan='3'>La banque ci-dessus n'a pas été supprimée, elle est associée à une récolte.</td></tr>");
+              }
           }
           ?>
       </tbody>
@@ -39,6 +42,7 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
   <?php include $root . '/app/view/fragment/fragmentCaveFooter.html'; ?>
 
   <!-- ----- fin viewAllBanque -->
+
   
   
   
