@@ -7,6 +7,7 @@ require ('../controller/ControllerRecolte.php');
 require ('../controller/ControllerBanque.php');
 require ('../controller/ControllerPersonne.php');
 require ('../controller/ControllerCompte.php');
+require ('../controller/ControllerResidence.php');
 
 // --- récupération de l'action passée dans l'URL
 $query_string = $_SERVER['QUERY_STRING'];
@@ -87,6 +88,12 @@ switch ($action) {
  case "compteReadAll" : 
 
   ControllerCompte::$action($args);
+  break;
+
+     //Residence
+ case "residenceReadAll" : 
+
+  ControllerResidence::$action($args);
   break;
 
     // Tache par défaut
