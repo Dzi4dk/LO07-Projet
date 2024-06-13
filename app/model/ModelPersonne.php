@@ -5,10 +5,11 @@
 require_once 'Model.php';
 
 class ModelPersonne {
- private $id, $prenom, $nom, $login, $password, $statut;
+ private $id, $prenom, $nom, $login, $password, $statut, $userId, $userPrenom, $userNom;
  
 
- public function __construct($id = NULL, $prenom = NULL, $nom = NULL, $login = NULL, $password = NULL, $statut = NULL) {
+ public function __construct($id = NULL, $prenom = NULL, $nom = NULL, $login = NULL, 
+         $password = NULL, $statut = NULL, $userNom = NULL, $userPrenom = NULL, $userId = NULL) {
   // valeurs nulles si pas de passage de parametres
   if (!is_null($id)) {
    $this->id = $id;
@@ -17,22 +18,25 @@ class ModelPersonne {
    $this->login = $login;
    $this->password = $password;
    $this->statut = $statut;
+   $this->userPrenomn = $userPrenom;
+   $this->userNom = $userNom;
+   $this->userId = $userId;
   }
  }
  
  
 //Setters
  
- function setNom($nom) {
-  $this->nom = $nom;
+ function setUserNom($userNom) {
+  $this->userNom = $userNom;
  }
 
- function setPrenom($prenom) {
-  $this->prenom = $prenom;
+ function setUserPrenom($userPrenom) {
+  $this->userPrenom = $userPrenom;
  }
  
- function setId($id) {
-  $this->id = $id;
+ function setUserId($userId) {
+  $this->userId = $userId;
  }
 
 
@@ -56,6 +60,18 @@ class ModelPersonne {
  
  function getStatut() {
   return $this->statut;
+ }
+ 
+ function getUserNom() {
+  return $this->userNom;
+ }
+
+  function getUserId() {
+  return $this->userId;
+ }
+ 
+ function getUserPrenom() {
+  return $this->userPrenom;
  }
  
 
@@ -92,6 +108,27 @@ class ModelPersonne {
    $statement->execute();
    $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelPersonne");
    return $results;
+  } catch (PDOException $e) {
+   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+   return NULL;
+  }
+ }
+ 
+ // Vérifier le login
+ public static function isVerified($prenom, $nom, $password) {
+  try {     
+   $database = Model::getInstance();
+   $query = "SELECT * FROM personne where prenom = :prenom AND nom = :nom AND password = :password";
+   $statement = $database->prepare($query);
+   $statement->execute([
+       'prenom' => $prenom,
+       'nom' => $nom,
+       'password' => $password
+   ]);
+   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelPersonne");
+   
+   return $results;
+   
   } catch (PDOException $e) {
    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
    return NULL;

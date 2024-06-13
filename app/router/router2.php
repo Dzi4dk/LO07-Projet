@@ -79,7 +79,9 @@ switch ($action) {
 
      //Personne
  case "personneReadAllClients" :
- case "personneReadAllAdmins" :        
+ case "personneReadAllAdmins" :  
+ case "personneShowLogin" :
+ case "personneLoginVerify" :
 
   ControllerPersonne::$action($args);
   break;
