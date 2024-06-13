@@ -5,6 +5,8 @@ require ('../controller/ControllerProducteur.php');
 require ('../controller/ControllerCave.php');
 require ('../controller/ControllerRecolte.php');
 require ('../controller/ControllerBanque.php');
+require ('../controller/ControllerPersonne.php');
+require ('../controller/ControllerCompte.php');
 
 // --- récupération de l'action passée dans l'URL
 $query_string = $_SERVER['QUERY_STRING'];
@@ -73,6 +75,19 @@ switch ($action) {
  case "banqueDeleted":
      ControllerBanque::$action($args);
      break;
+
+     //Personne
+ case "personneReadAllClients" :
+ case "personneReadAllAdmins" :        
+
+  ControllerPersonne::$action($args);
+  break;
+
+     //Compte
+ case "compteReadAll" : 
+
+  ControllerCompte::$action($args);
+  break;
 
     // Tache par défaut
  default:
