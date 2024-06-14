@@ -1,5 +1,9 @@
 <!-- ----- debut ControllerPersonne -->
 <?php
+if(session_status() == PHP_SESSION_NONE){
+    // Start Session it is not started yet
+    session_start();
+}
 require_once '../model/ModelPersonne.php';
 
 class ControllerPersonne {

@@ -5,16 +5,11 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
 
 <body>
   <div class="container">
-<<<<<<< Updated upstream
+
     <?php
-    include $root . '/app/view/fragment/fragmentCaveMenu.html';
-    include $root . '/app/view/fragment/fragmentCaveJumbotron.html';
-=======
-      <?php
       include $root . '/app/view/fragment/fragmentCaveMenu.php';
       include $root . '/app/view/fragment/fragmentCaveJumbotron.html';
-      ?>
->>>>>>> Stashed changes
+
 
     echo "<h2 style='color: red;'>Liste des résidences avec leurs propriétaires</h2>";
 
