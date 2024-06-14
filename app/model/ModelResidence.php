@@ -5,8 +5,7 @@
 require_once 'Model.php';
 
 class ModelResidence {
- private $id, $label, $prix, $ville, $personne_id;
- 
+ private $id, $label, $ville, $prix, $personne_id, $residence_id, $residence_label, $nom, $prenom;
 
  // pas possible d'avoir 2 constructeurs
  public function __construct($id = NULL, $label = NULL, $prix = NULL, $ville = NULL, $personne_id = NULL) {
@@ -21,204 +20,84 @@ class ModelResidence {
  }
  
  
-//Setters
- 
- function setLabel($label) {
-  $this->label = $label;
- }
+public function getId() {
+        return $this->id;
+    }
 
- function setPrix($prix) {
-  $this->prix = $prix;
- }
- 
- function setVille($ville) {
-  $this->ville = $ville;
- }
+    public function getLabel() {
+        return $this->label;
+    }
 
- function setPersonneId($personne_id) {
-  $this->personne_id = $personne_id;
- }
- 
- function setId($id) {
-  $this->id = $id;
- }
+    public function getVille() {
+        return $this->ville;
+    }
 
-//getters
+    public function getPrix() {
+        return $this->prix;
+    }
 
-  function getId() {
-  return $this->id;
- }
- 
- function getPrix() {
-  return $this->prix;
- }
+    public function getPersonneId() {
+        return $this->personne_id;
+    }
+    public function getResidenceId() {
+        return $this->residence_id;
+    }
 
- function getLabel() {
-  return $this->label;
- }
+    public function getResidenceLabel() {
+        return $this->residence_label;
+    }
 
-  function getVille() {
-  return $this->ville;
- }
- 
- function getPersonneId() {
-  return $this->personne_id;
- }
+    public function getNom() {
+        return $this->nom;
+    }
+
+    public function getPrenom() {
+        return $this->prenom;
+    }
+
+    // Setters
+    public function setId($id) {
+        $this->id = $id;
+    }
+
+    public function setLabel($label) {
+        $this->label = $label;
+    }
+
+    public function setVille($ville) {
+        $this->ville = $ville;
+    }
+
+    public function setPrix($prix) {
+        $this->prix = $prix;
+    }
+
+    public function setPersonneId($personne_id) {
+        $this->personne_id = $personne_id;
+    }
 
  //Functions
- 
- 
-// retourne une liste des id
- public static function getAllId() {
-  try {
-   $database = Model::getInstance();
-   $query = "select id from producteur";
-   $statement = $database->prepare($query);
-   $statement->execute();
-   $results = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
-   return $results;
-  } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return NULL;
-  }
- }
-
- public static function getMany($query) {
-  try {
-   $database = Model::getInstance();
-   $statement = $database->prepare($query);
-   $statement->execute();
-   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelVin");
-   return $results;
-  } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return NULL;
-  }
- }
-
  public static function getAll() {
-  try {     
-   $database = Model::getInstance();
-   $query = "select * from residence";
-   $statement = $database->prepare($query);
-   $statement->execute();
-   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelResidence");
-   return $results;
-  } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return NULL;
-  }
- }
-
- public static function getOne($id) {
-  try {
-   $database = Model::getInstance();
-   $query = "select * from producteur where id = :id";
-   $statement = $database->prepare($query);
-   $statement->execute([
-     'id' => $id
-   ]);
-   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelProducteur");
-   return $results;
-  } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return NULL;
-  }
- }
-
- public static function insert($nom, $prenom, $region) {
-  try {
-   $database = Model::getInstance();
-
-   // recherche de la valeur de la clé = max(id) + 1
-   $query = "select max(id) from producteur";
-   $statement = $database->query($query);
-   $tuple = $statement->fetch();
-   $id = $tuple['0'];
-   $id++;
-
-   // ajout d'un nouveau tuple;
-   $query = "insert into producteur value (:id, :nom, :prenom, :region)";
-   $statement = $database->prepare($query);
-   $statement->execute([
-     'id' => $id,
-     'nom' => $nom,
-     'prenom' => $prenom,
-     'region' => $region
-   ]);
-   return $id;
-  } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return -1;
-  }
- }
-
- public static function update() {
-  echo ("ModelVin : update() TODO ....");
-  return null;
- }
-
- public static function delete($id) {
-  try {
-   $database = Model::getInstance();
-   
-   //Savoir si le producteur est présent dans recolte
-   $query = "SELECT COUNT(*) FROM recolte WHERE producteur_id = :id";
-   $statement = $database->prepare($query);
-   $statement->execute([
-     'id' => $id
-   ]);
-   $results = $statement->fetchColumn();
-   
-   //On supprime le producteur ou non
-   if ($results == 0){
-       //Supprimer le producteur
-   $query = "DELETE FROM producteur where id = :id";
-   $statement = $database->prepare($query);
-   $statement->execute([
-     'id' => $id
-   ]);
-   return 1;
-   } 
-   else {
-       //On ne le supprime pas, il est présent dans une récolte
-       return 2;
-   }
-   
-  } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return 0;
-  }
- }
-
-  public static function getAllRegion() {
-  try {     
-   $database = Model::getInstance();
-   $query = "SELECT DISTINCT region FROM `producteur` ";
-   $statement = $database->prepare($query);
-   $statement->execute();
-   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelProducteur");
-   return $results;
-  } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return NULL;
-  }
- }
- 
- public static function getAllRegionProd() {
-  try {     
-   $database = Model::getInstance();
-   $query = "SELECT region, COUNT(*) AS nombre_producteurs FROM producteur GROUP BY region;` ";
-   $statement = $database->prepare($query);
-   $statement->execute();
-   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelProducteur");
-   return $results;
-  } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return NULL;
-  }
- }
- 
+        try {
+            $database = Model::getInstance();
+            $query = "SELECT 
+                    residence.id AS residence_id, 
+                    residence.label AS residence_label, 
+                    residence.ville, 
+                    residence.prix, 
+                    personne.nom, 
+                    personne.prenom 
+                  FROM residence 
+                  INNER JOIN personne ON residence.personne_id = personne.id
+                  ORDER BY residence.prix ASC";
+            $statement = $database->query($query);
+            $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelResidence");
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
 }
 ?>
 <!-- ----- fin ModelResidence -->

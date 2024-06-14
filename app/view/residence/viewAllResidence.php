@@ -1,45 +1,46 @@
 <!-- ----- début viewAll -->
 <?php
-
 require ($root . '/app/view/fragment/fragmentCaveHeader.html');
 ?>
 
 <body>
   <div class="container">
-      <?php
-      include $root . '/app/view/fragment/fragmentCaveMenu.html';
-      include $root . '/app/view/fragment/fragmentCaveJumbotron.html';
-      ?>
+    <?php
+    include $root . '/app/view/fragment/fragmentCaveMenu.html';
+    include $root . '/app/view/fragment/fragmentCaveJumbotron.html';
 
-    <table class = "table table-striped table-bordered">
-      <thead>
-        <tr>
-          <th scope = "col">id</th>
-          <th scope = "col">label</th>
-          <th scope = "col">prix</th>
-          <th scope = "col">ville</th>
-          <th scope = "col">personne id</th>
-        </tr>
-      </thead>
-      <tbody>
-          <?php
-          // La liste des vins est dans une variable $results             
-          foreach ($results as $element) {
-           printf("<tr><td>%d</td><td>%s</td><td>%d</td><td>%s</td><td>%d</td></tr>", $element->getId(), $element->getLabel(), 
-             $element->getPrix(), $element->getVille(), $element->getPersonneId());
-          }
-          if ($deleted == 1){
-              echo ("Le producteur ci dessus a bien été supprimé");
-          } 
-          elseif ($deleted == 2) {
-              echo ("Le producteur ci dessus n'a pas été supprimé, il est présent dans une récolte");          
-          }
-          ?>
-      </tbody>
-    </table>
+    echo "<h2 style='color: red;'>Liste des résidences avec leurs propriétaires</h2>";
+
+    if ($results) {
+        echo "<table class='table table-striped table-bordered'>";
+        echo "<thead><tr>";
+        echo "<th scope='col'>Nom</th>";
+        echo "<th scope='col'>Prénom</th>";
+        echo "<th scope='col'>Résidence</th>";
+        echo "<th scope='col'>Ville de la résidence</th>";
+        echo "<th scope='col'>Prix</th>";
+        echo "</tr></thead>";
+        echo "<tbody>";
+
+        foreach ($results as $residence) {
+            echo "<tr>";
+            echo "<td>" . htmlspecialchars($residence->getNom()) . "</td>";
+            echo "<td>" . htmlspecialchars($residence->getPrenom()) . "</td>";
+            echo "<td>" . htmlspecialchars($residence->getResidenceLabel()) . "</td>";
+            echo "<td>" . htmlspecialchars($residence->getVille()) . "</td>";
+            echo "<td style='text-align:right;'>" . number_format($residence->getPrix(), 2, ',', ' ') . "</td>";
+            echo "</tr>";
+        }
+
+        echo "</tbody></table>";
+    } else {
+        echo "<h3 style='color: red;'>Aucun compte trouvé.</h3>";
+    }
+    ?>
   </div>
-  <?php include $root . '/app/view/fragment/fragmentCaveFooter.html'; ?>
 
+  <?php include $root . '/app/view/fragment/fragmentCaveFooter.html'; ?>
+</body>
   <!-- ----- fin viewAll -->
   
   

@@ -9,7 +9,7 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
     include $root . '/app/view/fragment/fragmentCaveMenu.html';
     include $root . '/app/view/fragment/fragmentCaveJumbotron.html';
 
-    echo "<h2>Liste de tous les comptes</h2>";
+    echo "<h2 style='color: red;'>Liste de tous les comptes</h2>";
 
     if ($results) {
         echo "<table class='table table-striped table-bordered'>";
