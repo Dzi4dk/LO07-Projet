@@ -15,8 +15,8 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
     <form role="form" method='get' action='router2.php'>
       <div class="form-group">
         <input type="hidden" name='action' value='banqueCreated'>        
-        <label for="label">Label :</label><input type="text" name='label' class="form-control" placeholder="Entrez le label de la banque" required><br><br>
-        <label for="pays">Pays :</label><input type="text" name='pays' class="form-control" placeholder="Entrez le pays de la banque" required><br><br>
+        <label for="id">Label :</label><input type="text" name='label' class="form-control" placeholder="Entrez le label de la banque" required><br><br>
+        <label for="id">Pays :</label><input type="text" name='pays' class="form-control" placeholder="Entrez le pays de la banque" required><br><br>
       </div>
       <p/>
       <button class="btn btn-primary" type="submit">Ajouter</button>

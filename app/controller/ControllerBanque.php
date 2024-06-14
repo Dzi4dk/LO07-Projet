@@ -23,7 +23,16 @@ class ControllerBanque {
         require ($vue);
     }
 
-    
+    public static function banqueReadName($args) {        
+        $results = ModelBanque::getAllName();
+
+        $target = $args['target'];
+        // ----- Construction chemin de la vue
+        include 'config.php';
+        $vue = $root . '/app/view/vin/viewName.php';
+        require ($vue);
+       }
+ 
     
     // --- Lire une banque par ID
     public static function banqueReadOne($args) {

@@ -68,6 +68,7 @@ switch ($action) {
     // Banque
  case "banqueReadAll":
  case "banqueReadOne":
+ case "banqueReadName":
  case "banqueCreate":
  case "banqueCreated":
  case "banqueUpdate":

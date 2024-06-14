@@ -71,6 +71,19 @@ public static function getOne($id) {
   }
 }
 
+public static function getAllName() {
+  try {
+   $database = Model::getInstance();
+   $query = "select label from banque";
+   $statement = $database->prepare($query);
+   $statement->execute();
+   $results = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
+   return $results;
+  } catch (PDOException $e) {
+   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+   return NULL;
+  }
+ }
  
  // Ajouter une nouvelle banque
  public static function insert($label, $pays) {
@@ -85,10 +98,11 @@ public static function getOne($id) {
    $id++;
    
    
-   $query = "INSERT INTO banque value (:label, :pays)";
+   $query = "INSERT INTO banque value (:id, :label, :pays)";
    $statement = $database->prepare($query);
    $statement->execute([
-    'label' => $label,
+       'id' => $id,
+       'label' => $label,
     'pays' => $pays
    ]);
    return $id;
@@ -97,7 +111,7 @@ public static function getOne($id) {
    return NULL;
   }
  }
-
+ 
  // Mettre à jour une banque
  public static function update($id, $label, $pays) {
   try {
