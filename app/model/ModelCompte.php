@@ -1,6 +1,5 @@
 
 <!-- ----- debut ModelCompte -->
-
 <?php
 require_once 'Model.php';
 
@@ -65,160 +64,21 @@ class ModelCompte {
   return $this->personne_id;
  }
 
- //Functions
+ //Function
  
- 
-// retourne une liste des id
- public static function getAllId() {
+ public static function getByBanqueId($banqueId) {
   try {
-   $database = Model::getInstance();
-   $query = "select id from producteur";
-   $statement = $database->prepare($query);
-   $statement->execute();
-   $results = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
-   return $results;
+    $database = Model::getInstance();
+    $query = "SELECT * FROM compte WHERE banque_id = :banqueId";
+    $statement = $database->prepare($query);
+    $statement->execute(['banqueId' => $banqueId]);
+    $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelCompte");
+    return $results;
   } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return NULL;
+    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+    return NULL;
   }
- }
-
- public static function getMany($query) {
-  try {
-   $database = Model::getInstance();
-   $statement = $database->prepare($query);
-   $statement->execute();
-   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelVin");
-   return $results;
-  } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return NULL;
-  }
- }
-
- public static function getAll() {
-  try {     
-   $database = Model::getInstance();
-   $query = "select * from compte";
-   $statement = $database->prepare($query);
-   $statement->execute();
-   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelCompte");
-   return $results;
-  } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return NULL;
-  }
- }
-
- public static function getOne($id) {
-  try {
-   $database = Model::getInstance();
-   $query = "select * from producteur where id = :id";
-   $statement = $database->prepare($query);
-   $statement->execute([
-     'id' => $id
-   ]);
-   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelProducteur");
-   return $results;
-  } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return NULL;
-  }
- }
-
- public static function insert($nom, $prenom, $region) {
-  try {
-   $database = Model::getInstance();
-
-   // recherche de la valeur de la clé = max(id) + 1
-   $query = "select max(id) from producteur";
-   $statement = $database->query($query);
-   $tuple = $statement->fetch();
-   $id = $tuple['0'];
-   $id++;
-
-   // ajout d'un nouveau tuple;
-   $query = "insert into producteur value (:id, :nom, :prenom, :region)";
-   $statement = $database->prepare($query);
-   $statement->execute([
-     'id' => $id,
-     'nom' => $nom,
-     'prenom' => $prenom,
-     'region' => $region
-   ]);
-   return $id;
-  } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return -1;
-  }
- }
-
- public static function update() {
-  echo ("ModelVin : update() TODO ....");
-  return null;
- }
-
- public static function delete($id) {
-  try {
-   $database = Model::getInstance();
-   
-   //Savoir si le producteur est présent dans recolte
-   $query = "SELECT COUNT(*) FROM recolte WHERE producteur_id = :id";
-   $statement = $database->prepare($query);
-   $statement->execute([
-     'id' => $id
-   ]);
-   $results = $statement->fetchColumn();
-   
-   //On supprime le producteur ou non
-   if ($results == 0){
-       //Supprimer le producteur
-   $query = "DELETE FROM producteur where id = :id";
-   $statement = $database->prepare($query);
-   $statement->execute([
-     'id' => $id
-   ]);
-   return 1;
-   } 
-   else {
-       //On ne le supprime pas, il est présent dans une récolte
-       return 2;
-   }
-   
-  } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return 0;
-  }
- }
-
-  public static function getAllRegion() {
-  try {     
-   $database = Model::getInstance();
-   $query = "SELECT DISTINCT region FROM `producteur` ";
-   $statement = $database->prepare($query);
-   $statement->execute();
-   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelProducteur");
-   return $results;
-  } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return NULL;
-  }
- }
- 
- public static function getAllRegionProd() {
-  try {     
-   $database = Model::getInstance();
-   $query = "SELECT region, COUNT(*) AS nombre_producteurs FROM producteur GROUP BY region;` ";
-   $statement = $database->prepare($query);
-   $statement->execute();
-   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelProducteur");
-   return $results;
-  } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return NULL;
-  }
- }
- 
 }
-?>
+}
+ ?>
 <!-- ----- fin ModelCompte -->

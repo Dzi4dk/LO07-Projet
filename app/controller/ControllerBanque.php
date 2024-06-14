@@ -1,6 +1,7 @@
 <!-- ----- debut ControllerBanque -->
 <?php
 require_once '../model/ModelBanque.php';
+require_once '../model/ModelCompte.php';
 
 class ControllerBanque {
     // --- page d'accueil
@@ -29,15 +30,15 @@ class ControllerBanque {
         $target = $args['target'];
         // ----- Construction chemin de la vue
         include 'config.php';
-        $vue = $root . '/app/view/vin/viewName.php';
+        $vue = $root . '/app/view/banque/viewName.php';
         require ($vue);
        }
  
     
-    // --- Lire une banque par ID
-    public static function banqueReadOne($args) {
-        $id = $args['id'];
-        $results = ModelBanque::getOne($id);
+    // --- Lire une banque par son Label
+    public static function banqueRead($args) {
+        $label = $args['label'];
+        $results = ModelBanque::getOne($label);
         // ----- Construction chemin de la vue
         include 'config.php';
         $vue = $root . '/app/view/banque/viewOneBanque.php';
@@ -45,7 +46,20 @@ class ControllerBanque {
             echo ("ControllerBanque : banqueReadOne : vue = $vue");
         require ($vue);
     }
-
+    
+    public static function banqueReadOne($args) {
+        $label = htmlspecialchars($args['label']);
+        $banque = ModelBanque::getOne($label);
+        $banqueId = $banque['id'];
+        $comptes = ModelCompte::getByBanqueId($banqueId);
+        // ----- Construction chemin de la vue
+        include 'config.php';
+        $vue = $root . '/app/view/banque/viewOneBanque.php';
+        if (DEBUG)
+            echo ("ControllerBanque : banqueReadOne : vue = $vue");
+        require ($vue);
+    }
+    
     // --- Formulaire pour créer une nouvelle banque
     public static function banqueCreate() {
         include 'config.php';

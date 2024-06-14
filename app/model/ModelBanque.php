@@ -57,13 +57,13 @@ class ModelBanque {
   }
  } 
  
-public static function getOne($id) {
+public static function getOne($label) {
   try {
     $database = Model::getInstance();
-    $query = "SELECT * FROM banque WHERE id = :id";
+    $query = "SELECT * FROM banque WHERE label = :label";
     $statement = $database->prepare($query);
-    $statement->execute(['id' => $id]);
-    $result = $statement->fetch(PDO::FETCH_ASSOC); // Utilisez FETCH_ASSOC ou FETCH_OBJ
+    $statement->execute(['label' => $label]);
+    $result = $statement->fetch(PDO::FETCH_ASSOC);
     return $result;
   } catch (PDOException $e) {
     printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());

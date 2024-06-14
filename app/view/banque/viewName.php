@@ -13,7 +13,7 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
     <form role="form" method='get' action='router2.php'>
       <div class="form-group">
         <input type="hidden" name='action' value='<?php echo ($target); ?>'>
-        <label for="id">Label : </label> <select class="form-control" id='label' name='label' style="width: 100px">
+        <label for="id">Label : </label> <select class="form-control" id='label' name='label' style="width: 300px">
             <?php
             foreach ($results as $label) {
              echo ("<option>$label</option>");

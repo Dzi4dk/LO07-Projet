@@ -74,7 +74,6 @@ switch ($action) {
  case "banqueUpdate":
  case "banqueUpdated":
  case "banqueDelete":
- case "banqueDeleted":
      ControllerBanque::$action($args);
      break;
 
