@@ -134,6 +134,39 @@ class ModelPersonne {
    return NULL;
   }
  }
+ 
+ //Register une nouvelle personne dans la base de données
+  public static function isRegistered($prenom, $nom, $password, $login) {
+  try {     
+   $database = Model::getInstance();
+   
+   // recherche de la valeur de la clé = max(id) + 1
+   $query = "select max(id) from personne";
+   $statement = $database->query($query);
+   $tuple = $statement->fetch();
+   $id = $tuple['0'];
+   $id++;
+   
+   
+   $query = "INSERT INTO personne value (:id, :nom, :prenom, :statut, :login, :password)";
+   $statement = $database->prepare($query);
+   $statement->execute([
+       'id' => $id,
+       'prenom' => $prenom,
+       'nom' => $nom,
+       'password' => $password,
+       'login' => $login,
+       'statut' => 1
+   ]);
+   
+   
+   return $id;   
+  } catch (PDOException $e) {
+   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+   return NULL;
+  }
+ }
+
 
  
  

@@ -4,6 +4,10 @@
 <body>
   <div class="container">
     <?php
+    if ($_SESSION['justLogged']){
+        include 'fragment/fragmentConnectedPopup.php';
+        $_SESSION['justLogged'] = false;
+    }
     include 'fragment/fragmentCaveMenu.php';
     include 'fragment/fragmentCaveJumbotron.html';
     ?>

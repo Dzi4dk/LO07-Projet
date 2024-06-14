@@ -44,6 +44,9 @@ switch ($action) {
  case "personneReadAllAdmins" :  
  case "personneShowLogin" :
  case "personneLoginVerify" :
+ case "personneDisconnect" :
+ case "personneShowRegister" :
+ case "personneRegisterIn" :
 
   ControllerPersonne::$action($args);
   break;
