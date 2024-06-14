@@ -55,7 +55,9 @@ switch ($action) {
  case "compteReadAll" : 
  case "compteReadAllUser" :
  case "compteCreate" :
+ case "compteCreated" :    
  case "compteTransfert" :
+ case "compteTransfered" :
 
   ControllerCompte::$action($args);
   break;

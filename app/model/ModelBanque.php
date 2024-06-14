@@ -71,6 +71,22 @@ public static function getOne($label) {
   }
 }
 
+public static function getOneId($id) {
+  try {
+    $database = Model::getInstance();
+    $query = "SELECT * FROM banque WHERE id = :id";
+    $statement = $database->prepare($query);
+    $statement->execute([
+        'id' => $id
+            ]);
+    $result = $statement->fetchAll(PDO::FETCH_CLASS, "ModelBanque");
+    return $result;
+  } catch (PDOException $e) {
+    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+    return NULL;
+  }
+}
+
 public static function getAllName() {
   try {
    $database = Model::getInstance();
