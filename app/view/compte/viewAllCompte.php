@@ -6,7 +6,7 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
 <body>
   <div class="container">
     <?php
-    include $root . '/app/view/fragment/fragmentCaveMenu.html';
+    include $root . '/app/view/fragment/fragmentCaveMenu.php';
     include $root . '/app/view/fragment/fragmentCaveJumbotron.html';
 
     echo "<h2 style='color: red;'>Liste de tous les comptes</h2>";

@@ -13,7 +13,7 @@ class ControllerResidence {
   include 'config.php';
   $vue = $root . '/app/view/residence/viewAllResidence.php';
   if (DEBUG)
-   echo ("ControllerResidence : residdenceReadAll : vue = $vue");
+   echo ("ControllerResidence : residenceReadAll : vue = $vue");
   require ($vue);
  } 
 }
