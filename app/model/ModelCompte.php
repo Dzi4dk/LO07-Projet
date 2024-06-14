@@ -142,6 +142,20 @@ class ModelCompte {
         }
     }
     
+    public static function getAllUserId2($id) {
+        try {
+            $database = Model::getInstance();
+            $query = "SELECT * FROM compte where personne_id = :id";
+            $statement = $database->prepare($query);
+            $statement->execute(['id' => $id]);
+            $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelCompte");
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+    
     // Ajouter un nouveau compte
  public static function insert($label, $banque_id, $personne_id) {
   try {

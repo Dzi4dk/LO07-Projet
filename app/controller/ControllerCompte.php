@@ -56,7 +56,7 @@ class ControllerCompte {
     
      // --- Formulaire pour transférer un montant entre deux comptes
     public static function compteTransfert() {
-        $results = ModelCompte::getAlluserId($_SESSION['user_id']);
+        $results = ModelCompte::getAllUserId2($_SESSION['user_id']);
         include 'config.php';
         $vue = $root . '/app/view/compte/viewTransfertCompte.php';
         require ($vue);

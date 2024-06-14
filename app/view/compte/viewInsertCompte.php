@@ -16,7 +16,7 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
       <div class="form-group">
         <input type="hidden" name='action' value='compteCreated'>        
         <label for="id">Label :</label><input type="text" name='label' class="form-control" placeholder="Entrez le label du compte" required><br>
-        <label for="vin_select" required>Banque : </label>
+        <label for="compte_select" required>Banque : </label>
         <select class="form-control" id="banque_id" name="banque_id" style="width: 300px">
           <option value="">Sélectionnez une banque</option>
           <?php
