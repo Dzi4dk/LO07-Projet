@@ -37,7 +37,7 @@ if(session_status() == PHP_SESSION_NONE){
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Innovations</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="router2.php?action=vinReadAll">1 ----------- 1</a></li>
+            <li><a class="dropdown-item" href="router2.php?action=vinReadAll">Nous contacter</a></li>
             <li><a class="dropdown-item" href="router2.php?action=vinReadId&target=vinReadOne">2 ----------- 2</a></li>
           </ul>
         </li>

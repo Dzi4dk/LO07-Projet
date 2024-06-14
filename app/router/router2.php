@@ -1,9 +1,6 @@
 <!-- ----- debut Router2 -->
 <?php
-require ('../controller/ControllerVin.php');
-require ('../controller/ControllerProducteur.php');
 require ('../controller/ControllerCave.php');
-require ('../controller/ControllerRecolte.php');
 require ('../controller/ControllerBanque.php');
 require ('../controller/ControllerPersonne.php');
 require ('../controller/ControllerCompte.php');
@@ -30,41 +27,6 @@ $args = $param;
 
 // --- Liste des méthodes autorisées
 switch ($action) {
-    // Vin
- case "vinReadAll":
- case "vinReadOne":
- case "vinReadId":
- case "vinCreate":
- case "vinCreated":
- case "vinDeleted":
-     ControllerVin::$action($args);
-     break;
-
-    // Producteur
- case "prodReadAll":
- case "prodReadOne":
- case "prodReadId":
- case "prodCreate":
- case "prodCreated":
- case "prodReadAllRegion":
- case "prodReadAllRegionProd":
- case "prodDeleted":
-     ControllerProducteur::$action($args);
-     break;
-
-    // Recolte
- case "recolteReadAll":
- case "recolteReadAllinfos":
- case "recolteCreate":
- case "recolteCreated":
-     ControllerRecolte::$action($args);
-     break;
-
-    // Propositions
- case "mesPropositions":
-     ControllerCave::$action($args);
-     break;
-
     // Banque
  case "banqueReadAll":
  case "banqueReadOne":
