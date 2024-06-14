@@ -14,17 +14,18 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
     <table class = "table table-striped table-bordered">
       <thead>
         <tr>
-          <th scope = "col">id</th>
-          <th scope = "col">nom</th>
-          <th scope = "col">prenom</th>
-          <th scope = "col">region</th>
+          <th scope = "col">Client_nom</th>
+          <th scope = "col">Client_prénom</th>
+          <th scope = "col">Banque_label</th>
+          <th scope = "col">Banque_pays</th>
+          <th scope = "col">Compte_label</th>
+          <th scope = "col">Compte_montant</th>
         </tr>
       </thead>
       <tbody>
-          <?php
-          // La liste des vins est dans une variable $results             
+          <?php             
           foreach ($results as $element) {
-           printf("<tr><td>%d</td><td>%s</td><td>%s</td><td>%s</td></tr>", $element->getId(), $element->getNom(), 
+           printf("<tr><td>%d</td><td>%s</td><td>%s</td><td>%s</td></tr>", $element->getNom(), 
              $element->getPrenom(), $element->getRegion());
           }
           if ($deleted == 1){

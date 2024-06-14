@@ -35,7 +35,7 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
                 echo "<td>" . htmlspecialchars($compte['nom']) . "</td>";
                 echo "<td>" . htmlspecialchars($banque['label']) . "</td>";
                 echo "<td>" . htmlspecialchars($compte['label']) . "</td>";
-                echo "<td>" . number_format($compte['montant'], 2, ',', ' ') . "</td>";
+                echo "<td style='text-align: right;'>" . number_format($compte['montant'], 2, ',', ' ') . "</td>";
                 echo "</tr>";
                 echo "</tr>";
             }

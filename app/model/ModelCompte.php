@@ -4,7 +4,7 @@
 require_once 'Model.php';
 
 class ModelCompte {
- private $id, $label, $montant, $banque_id, $personne_id;
+ private $id, $label, $montant, $banque_id, $personne_id, $compte_label, $compte_montant, $personne_nom, $personne_prenom, $banque_label, $banque_pays;
  
 
  // pas possible d'avoir 2 constructeurs
@@ -63,6 +63,29 @@ class ModelCompte {
  function getPersonneId() {
   return $this->personne_id;
  }
+    public function getCompteLabel() {
+        return $this->compte_label;
+    }
+
+    public function getCompteMontant() {
+        return $this->compte_montant;
+    }
+
+    public function getPersonneNom() {
+        return $this->personne_nom;
+    }
+
+    public function getPersonnePrenom() {
+        return $this->personne_prenom;
+    }
+
+    public function getBanqueLabel() {
+        return $this->banque_label;
+    }
+
+    public function getBanquePays() {
+        return $this->banque_pays;
+    }
 
  //Function
  
@@ -82,6 +105,24 @@ class ModelCompte {
         return NULL;
     }
 }
+
+public static function getAll() {
+        try {
+            $database = Model::getInstance();
+            $query = "SELECT compte.label AS compte_label, compte.montant AS compte_montant, 
+                             personne.nom AS personne_nom, personne.prenom AS personne_prenom, 
+                             banque.label AS banque_label, banque.pays AS banque_pays 
+                      FROM compte
+                      JOIN personne ON compte.personne_id = personne.id
+                      JOIN banque ON compte.banque_id = banque.id";
+            $statement = $database->query($query);
+            $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelCompte");
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
 }
  ?>
 <!-- ----- fin ModelCompte -->
