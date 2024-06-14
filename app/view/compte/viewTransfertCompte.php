@@ -20,8 +20,8 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
           <option value="">Sélectionnez un compte</option>
           <?php
           foreach ($results as $element) {
-            printf("<option value='%d'>%d : %s : %s</option>",
-              $element->getId(), $element->getId(), $element->getLabel(), $value_montant = $element->getMontant());
+            printf("<option value='%d'>%s : Montant : %s €</option>",
+              $element->getId(), $element->getLabel(), $value_montant = $element->getMontant());
             }
           ?>
           
@@ -33,8 +33,8 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
           <option value="">Sélectionnez un compte</option>
           <?php
           foreach ($results as $element) {
-            printf("<option value='%d'>%d : %s : %s</option>",
-              $element->getId(), $element->getId(), $element->getLabel(), $element->getMontant());  
+            printf("<option value='%d'>%s : Montant : %s €</option>",
+              $element->getId(), $element->getLabel(), $element->getMontant());  
             }
           ?>
       </select><br>

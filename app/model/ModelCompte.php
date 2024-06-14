@@ -185,6 +185,51 @@ class ModelCompte {
    return NULL;
   }
  }
+ 
+ public static function transfert($id_compte_1, $id_compte_2, $montant) {
+  try {
+   $database = Model::getInstance();
+   
+   //Début de la transaction
+   
+   
+   $query = "INSERT INTO compte value (:id, :label, :montant, :banque_id, :personne_id)";
+   $statement = $database->prepare($query);
+   $statement->execute([
+       'id' => $id,
+       'label' => $label,
+       'banque_id' => $banque_id,
+       'personne_id' => $personne_id,
+       'montant' => $montant
+   ]);
+   return $id;
+  } catch (PDOException $e) {
+   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+   return NULL;
+  }
+  
+  try {
+                //On lance la transaction
+                echo("Début de la transaction<br/>");
+                $db->beginTransaction();
+                
+                echo 'Insertion 1<br/>';
+                $db->exec($requete5);
+                
+                echo 'Insertion 2<br/>';
+                $db->exec($requete5);
+                
+                echo 'Fin de la transaction<br/>';
+                $db->commit();
+                
+                } catch(PDOException $error){
+                    
+                    echo 'Erreur détectée : on rollback<br/>';
+                    $db->rollBack();
+                    echo ("Erreur : " .$error->getMessage());                  
+                    
+                }
+ }
 }
  ?>
 <!-- ----- fin ModelCompte -->

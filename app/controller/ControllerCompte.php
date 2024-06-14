@@ -45,7 +45,6 @@ class ControllerCompte {
     // --- Ajouter une nouveau compte à la base de données
     public static function compteCreated() {
         $personne_id = $_SESSION['user_id'];
-        echo $personne_id . $_GET['label'] . $_GET['banque_id'];
         $results[0] = ModelCompte::insert(htmlspecialchars($_GET['label']), $_GET['banque_id'], $personne_id);
         $results[1] = ModelBanque::getOneId($_GET['banque_id']);
         // ----- Construction chemin de la vue
@@ -59,6 +58,15 @@ class ControllerCompte {
         $results = ModelCompte::getAllUserId2($_SESSION['user_id']);
         include 'config.php';
         $vue = $root . '/app/view/compte/viewTransfertCompte.php';
+        require ($vue);
+    }
+    
+    // --- Ajouter une nouveau compte à la base de données
+    public static function compteTransfered() {
+        $results = ModelCompte::transfert($_GET['compte_1_id'], $_GET['compte_2_id'], $_GET['montant']);
+        // ----- Construction chemin de la vue
+        include 'config.php';
+        $vue = $root . '/app/view/compte/viewTransferedCompte.php';
         require ($vue);
     }
 }
