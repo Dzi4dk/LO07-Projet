@@ -19,8 +19,8 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
     <form role="form" method='get' action='router2.php'>
       <div class="form-group">
         <input type="hidden" name='action' value='personneLoginVerify'>        
-        <label class='w-25' for="id">Nom : </label><input type="text" name='nom' size='75' value='Le'> <br/>                          
-        <label class='w-25' for="id">Prénom : </label><input type="text" name='prenom' value='Boss'> <br/> 
+        <label class='w-25' for="id">Nom : </label><input type="text" name='nom' size='75' value='SWIFT'> <br/>                          
+        <label class='w-25' for="id">Prénom : </label><input type="text" name='prenom' value='Taylor'> <br/> 
         <label class='w-25' for="id">Mot de passe : </label><input type="password" name='password' value='secret'> <br/>          
       </div>
       <p/>

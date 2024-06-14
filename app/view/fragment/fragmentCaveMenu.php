@@ -19,13 +19,32 @@ if(session_status() == PHP_SESSION_NONE){
           <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Banques</a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="router2.php?action=banqueReadAll">Liste des banques</a></li>
-            <li><a class="dropdown-item" href="router2.php?action=banqueCreate">Ajout d une banque</a></li>
-            <li><a class="dropdown-item" href="router2.php?action=banqueReadName&target=banqueReadOne">Liste des comptes d une banque</a></li>
+            <li><a class="dropdown-item" href="router2.php?action=banqueCreate">Ajouter une banque</a></li>
+            <li><a class="dropdown-item" href="router2.php?action=banqueReadName&target=banqueReadOne">Liste des comptes dans une banque</a></li>
           </ul>
         </li>
         
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Clients</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="router2.php?action=personneReadAllClients">Liste des clients</a></li>
+            <li><a class="dropdown-item" href="router2.php?action=personneReadAllAdmins">Liste des administrateurs</a></li>
+            <li><a class="dropdown-item" href="router2.php?action=compteReadAll">Liste des comptes</a></li>
+            <li><a class="dropdown-item" href="router2.php?action=residenceReadAll">Liste des résidences</a></li>
+          </ul>
+        </li>';?>
+          
+          <?php if ($_SESSION['statut'] == 1) echo '<li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Banques</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="router2.php?action=compteReadAllUser">Vos comptes</a></li>
+            <li><a class="dropdown-item" href="router2.php?action=compteCreate">Ajouter un compte</a></li>
+            <li><a class="dropdown-item" href="router2.php?action=compteTransfert">Transférer entre les comptes</a></li>
+          </ul>
+        </li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Résidences</a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="router2.php?action=personneReadAllClients">Liste des clients</a></li>
             <li><a class="dropdown-item" href="router2.php?action=personneReadAllAdmins">Liste des administrateurs</a></li>
