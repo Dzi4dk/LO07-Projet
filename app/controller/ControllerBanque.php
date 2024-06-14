@@ -48,17 +48,19 @@ class ControllerBanque {
     }
     
     public static function banqueReadOne($args) {
-        $label = htmlspecialchars($args['label']);
-        $banque = ModelBanque::getOne($label);
-        $banqueId = $banque['id'];
-        $comptes = ModelCompte::getByBanqueId($banqueId);
-        // ----- Construction chemin de la vue
-        include 'config.php';
-        $vue = $root . '/app/view/banque/viewOneBanque.php';
-        if (DEBUG)
-            echo ("ControllerBanque : banqueReadOne : vue = $vue");
-        require ($vue);
-    }
+    $label = $args['label'];
+    $banque = ModelBanque::getOne($label);
+    $banqueId = $banque['id'];
+    $comptes = ModelCompte::getByBanqueId($banqueId);
+
+    // ----- Construction chemin de la vue
+    include 'config.php';
+    $vue = $root . '/app/view/banque/viewOneBanque.php';
+    if (DEBUG)
+        echo ("ControllerBanque : banqueReadOne : vue = $vue");
+    require ($vue);
+}
+
     
     // --- Formulaire pour créer une nouvelle banque
     public static function banqueCreate() {

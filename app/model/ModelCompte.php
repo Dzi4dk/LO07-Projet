@@ -67,17 +67,20 @@ class ModelCompte {
  //Function
  
  public static function getByBanqueId($banqueId) {
-  try {
-    $database = Model::getInstance();
-    $query = "SELECT * FROM compte WHERE banque_id = :banqueId";
-    $statement = $database->prepare($query);
-    $statement->execute(['banqueId' => $banqueId]);
-    $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelCompte");
-    return $results;
-  } catch (PDOException $e) {
-    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-    return NULL;
-  }
+    try {
+        $database = Model::getInstance();
+        $query = "SELECT compte.*, personne.prenom, personne.nom 
+                  FROM compte 
+                  JOIN personne ON compte.personne_id = personne.id 
+                  WHERE compte.banque_id = :banqueId";
+        $statement = $database->prepare($query);
+        $statement->execute(['banqueId' => $banqueId]);
+        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $results;
+    } catch (PDOException $e) {
+        printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+        return NULL;
+    }
 }
 }
  ?>

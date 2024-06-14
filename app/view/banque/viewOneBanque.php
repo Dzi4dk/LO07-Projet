@@ -1,5 +1,4 @@
 <!-- ----- début viewOneBanque -->
-<!-- ----- début viewOneBanque -->
 <?php
 require ($root . '/app/view/fragment/fragmentCaveHeader.html');
 ?>
@@ -32,11 +31,12 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
         if ($comptes) {
             foreach ($comptes as $compte) {
                 echo "<tr>";
-                echo "<td>Prénom</td>";  // Remplacer par la variable appropriée
-                echo "<td>Nom</td>";  // Remplacer par la variable appropriée
+                echo "<td>" . htmlspecialchars($compte['prenom']) . "</td>";
+                echo "<td>" . htmlspecialchars($compte['nom']) . "</td>";
                 echo "<td>" . htmlspecialchars($banque['label']) . "</td>";
-                echo "<td>" . htmlspecialchars($compte->getLabel()) . "</td>";
-                echo "<td>" . number_format($compte->getMontant(), 2, ',', ' ') . "</td>";
+                echo "<td>" . htmlspecialchars($compte['label']) . "</td>";
+                echo "<td>" . number_format($compte['montant'], 2, ',', ' ') . "</td>";
+                echo "</tr>";
                 echo "</tr>";
             }
         } else {
@@ -51,4 +51,3 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
 </body>
 <!-- ----- fin viewOneBanque -->
 
-<!-- ----- fin viewOneBanque -->
