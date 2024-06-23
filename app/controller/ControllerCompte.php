@@ -63,7 +63,9 @@ class ControllerCompte {
     
     // --- Ajouter une nouveau compte à la base de données
     public static function compteTransfered() {
-        $results = ModelCompte::transfert($_GET['compte_1_id'], $_GET['compte_2_id'], $_GET['montant']);
+        $results[0] = ModelCompte::transfert($_GET['compte_1_id'], $_GET['compte_2_id'], $_GET['montant']);
+        $results[1] = ModelCompte::getAllCompteId($_GET['compte_1_id']);
+        $results[2] = ModelCompte::getAllCompteId($_GET['compte_2_id']);
         // ----- Construction chemin de la vue
         include 'config.php';
         $vue = $root . '/app/view/compte/viewTransferedCompte.php';

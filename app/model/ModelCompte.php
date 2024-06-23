@@ -156,6 +156,20 @@ class ModelCompte {
         }
     }
     
+    public static function getAllCompteId($id) {
+        try {
+            $database = Model::getInstance();
+            $query = "SELECT * FROM compte where id = :id";
+            $statement = $database->prepare($query);
+            $statement->execute(['id' => $id]);
+            $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelCompte");
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+    
     // Ajouter un nouveau compte
  public static function insert($label, $banque_id, $personne_id) {
   try {
@@ -187,49 +201,57 @@ class ModelCompte {
  }
  
  public static function transfert($id_compte_1, $id_compte_2, $montant) {
-  try {
+
    $database = Model::getInstance();
-   
-   //Début de la transaction
-   
-   
-   $query = "INSERT INTO compte value (:id, :label, :montant, :banque_id, :personne_id)";
-   $statement = $database->prepare($query);
-   $statement->execute([
-       'id' => $id,
-       'label' => $label,
-       'banque_id' => $banque_id,
-       'personne_id' => $personne_id,
-       'montant' => $montant
-   ]);
-   return $id;
-  } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return NULL;
-  }
   
   try {
+                // On vérifie d'abord le solde du compte 1
+                $query = "SELECT montant FROM compte WHERE id = :id_compte_1";
+                $statement = $database->prepare($query);
+                $statement->execute(['id_compte_1' => $id_compte_1]);
+                $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+                // Si le solde après la transaction sera négatif, on arrête ici
+                if (($result['montant'] - $montant) < 0) {
+                    return 2;
+                }
+                
+      
                 //On lance la transaction
-                echo("Début de la transaction<br/>");
-                $db->beginTransaction();
+                $database->beginTransaction();
                 
-                echo 'Insertion 1<br/>';
-                $db->exec($requete5);
+                //On enlève les fonds du compte 1
+                $query1 = "UPDATE compte SET montant = montant - :montant WHERE id = :id_compte_1;";
+                $statement = $database->prepare($query1);
+                $statement->execute([
+                    'id_compte_1' => $id_compte_1,
+                    'montant' => $montant
+                ]);
                 
-                echo 'Insertion 2<br/>';
-                $db->exec($requete5);
+                //On ajoute les fonds au compte 2
+                $query2 = "UPDATE compte SET montant = montant + :montant WHERE id = :id_compte_2;";
+                $statement = $database->prepare($query2);
+                $statement->execute([
+                    'id_compte_2' => $id_compte_2,
+                    'montant' => $montant
+                ]);
+
                 
-                echo 'Fin de la transaction<br/>';
-                $db->commit();
+                //Fin de la transaction
+                $database->commit();
                 
-                } catch(PDOException $error){
+                return 0;
+                
+  } catch(PDOException $error){
                     
                     echo 'Erreur détectée : on rollback<br/>';
-                    $db->rollBack();
-                    echo ("Erreur : " .$error->getMessage());                  
-                    
-                }
- }
+                    $database->rollBack();
+                    echo ("Erreur : " .$error->getMessage()); 
+                    return 1;
+   }
+  }
+ 
+
 }
  ?>
 <!-- ----- fin ModelCompte -->

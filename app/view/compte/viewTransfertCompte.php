@@ -26,7 +26,7 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
           ?>
           
         </select><br>
-        <label for="id">Montant :</label><input type="number" name="montant" min="0" max="<?php $value_montant ?>" class="form-control" placeholder="100 000" required><br>
+        <label for="id">Montant :</label><input type="number" name="montant" min="10" max="<?php $value_montant ?>" class="form-control" placeholder="10€ mini" required><br>
         
         <label for="compte_select" required>Compte où arrive le transfert : </label>
         <select class="form-control" id="compte_2_id" name="compte_2_id" style="width: 300px">
