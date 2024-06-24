@@ -21,8 +21,6 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
     if ($results) {
         echo "<table class='table table-striped table-bordered'>";
         echo "<thead><tr>";
-        echo "<th scope='col'>Nom</th>";
-        echo "<th scope='col'>Prénom</th>";
         echo "<th scope='col'>Résidence</th>";
         echo "<th scope='col'>Ville de la résidence</th>";
         echo "<th scope='col'>Prix</th>";

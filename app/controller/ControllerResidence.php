@@ -1,6 +1,9 @@
-
-<!-- ----- debut ControllerResidence -->
 <?php
+if(session_status() == PHP_SESSION_NONE){
+    // Start Session it is not started yet
+    session_start();
+}
+
 require_once '../model/ModelResidence.php';
 
 class ControllerResidence {
@@ -29,6 +32,25 @@ class ControllerResidence {
    echo ("ControllerResidence : residenceReadAllUser : vue = $vue");
   require ($vue);
  } 
+ 
+ // --- Formulaire pour achat residence
+    public static function achatResidence() {
+        $results = ModelResidence::getAllUserResidence($_SESSION['user_id']);
+        include 'config.php';
+        $vue = $root . '/app/view/residence/viewAchatResidence.php';
+        require ($vue);
+    }
+    
+    public static function achatEffectue() {
+        $nom_residence = ModelResidence::getLabelForResidence(isset($_GET['residence']));
+        $id_vendeur = ModelResidence::getIdForResidence(isset($_GET['residence']));
+        $results[0] = ModelCompte::getAllCompteId($id_vendeur);
+        $results[1] = ModelCompte::getAllCompteId($_SESSION['user_id']);
+        
+        include 'config.php';
+        $vue = $root . '/app/view/residence/viewAchatResidence2.php';
+        require ($vue);
+    }
 }
 ?>
 <!-- ----- fin ControllerResidence -->

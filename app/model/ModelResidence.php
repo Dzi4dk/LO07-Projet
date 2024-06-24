@@ -101,15 +101,29 @@ public function getId() {
     
      public static function getAllUserId($id) {
         try {
-            $database = Model::getInstance();
-            $query = "SELECT 
+        $database = Model::getInstance();
+        $query = "SELECT 
                     residence.id AS residence_id, 
                     residence.label AS residence_label, 
                     residence.ville, 
                     residence.prix
                   FROM residence 
-                  ORDER BY residence.prix ASC
-                  where personne_id = :id";
+                  WHERE personne_id = :id
+                  ORDER BY residence.prix ASC";
+        $statement = $database->prepare($query);
+        $statement->execute(['id' => $id]);
+        $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelResidence");
+        return $results;
+    } catch (PDOException $e) {
+        printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+        return NULL;
+    }
+    }
+    
+    public static function getAllUserResidence($id) {
+        try {
+            $database = Model::getInstance();
+            $query = "SELECT * FROM residence where personne_id = :id";
             $statement = $database->prepare($query);
             $statement->execute(['id' => $id]);
             $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelResidence");
@@ -119,6 +133,35 @@ public function getId() {
             return NULL;
         }
     }
+    
+    public static function getIdForResidence(){
+        try {
+            $database = Model::getInstance();
+            $query = "SELECT personne_id FROM residence WHERE id = :residence_id";
+            $statement = $database->prepare($query);
+            $statement->execute(['residence_id' => $residenceId]);
+            $id_vendeur = $statement->fetch(PDO::FETCH_ASSOC);
+            return $id_vendeur;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+    
+    public static function getLabelForResidence(){
+        try {
+            $database = Model::getInstance();
+            $query = "SELECT label FROM residence WHERE id = :residence_id";
+            $statement = $database->prepare($query);
+            $statement->execute(['residence_id' => $residenceId]);
+            $id_vendeur = $statement->fetch(PDO::FETCH_ASSOC);
+            return $id_vendeur;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+    
 }
 ?>
 <!-- ----- fin ModelResidence -->

@@ -35,21 +35,19 @@ if(session_status() == PHP_SESSION_NONE){
         </li>';?>
           
           <?php if ($_SESSION['statut'] == 1) echo '<li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Banques</a>
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mes comptes bancaires</a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="router2.php?action=compteReadAllUser">Vos comptes</a></li>
-            <li><a class="dropdown-item" href="router2.php?action=compteCreate">Ajouter un compte</a></li>
-            <li><a class="dropdown-item" href="router2.php?action=compteTransfert">Transférer entre les comptes</a></li>
+            <li><a class="dropdown-item" href="router2.php?action=compteCreate">Ajouter un nouveau compte</a></li>
+            <li><a class="dropdown-item" href="router2.php?action=compteTransfert">Transfert inter-comptes</a></li>
           </ul>
         </li>
         
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Résidences</a>
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mes résidences</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="router2.php?action=residenceReadAllUser">Liste des résidences</a></li>
-            <li><a class="dropdown-item" href="router2.php?action=personneReadAllAdmins">Liste des administrateurs</a></li>
-            <li><a class="dropdown-item" href="router2.php?action=compteReadAll">Liste des comptes</a></li>
-            <li><a class="dropdown-item" href="router2.php?action=residenceReadAll">Liste des résidences</a></li>
+            <li><a class="dropdown-item" href="router2.php?action=residenceReadAllUser">Liste de mes résidences</a></li>
+            <li><a class="dropdown-item" href="router2.php?action=achatResidence">Achat de nouvelle résidence</a></li>
           </ul>
         </li>';?>
           
@@ -58,8 +56,8 @@ if(session_status() == PHP_SESSION_NONE){
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Innovations</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="router2.php?action=vinReadAll">Nous contacter</a></li>
-            <li><a class="dropdown-item" href="router2.php?action=vinReadId&target=vinReadOne">2 ----------- 2</a></li>
+            <li><a class="dropdown-item" href="router2.php?action=emailForm">Nous contacter</a></li>
+            <li><a class="dropdown-item" href="router2.php?action=vinReadId&target=vinReadOne">Innovation du code MVC</a></li>
           </ul>
         </li>
         
