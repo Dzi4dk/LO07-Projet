@@ -10,7 +10,7 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
     include $root . '/app/view/fragment/fragmentCaveJumbotron.html';
     ?> 
 
-    <h2 style="color: red;">Formulaire pour le transfert d'argent entre deux comptes</h2>
+    <h2 style="color: grey;">Formulaire pour le transfert d'argent entre deux comptes</h2>
 
     <form role="form" method='get' action='router2.php'>
       <div class="form-group">

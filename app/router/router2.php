@@ -64,6 +64,7 @@ switch ($action) {
 
      //Residence
  case "residenceReadAll" : 
+ case "residenceReadAllUser" :
 
   ControllerResidence::$action($args);
   break;

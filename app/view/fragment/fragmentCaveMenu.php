@@ -46,7 +46,7 @@ if(session_status() == PHP_SESSION_NONE){
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Résidences</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="router2.php?action=personneReadAllClients">Liste des clients</a></li>
+            <li><a class="dropdown-item" href="router2.php?action=residenceReadAllUser">Liste des résidences</a></li>
             <li><a class="dropdown-item" href="router2.php?action=personneReadAllAdmins">Liste des administrateurs</a></li>
             <li><a class="dropdown-item" href="router2.php?action=compteReadAll">Liste des comptes</a></li>
             <li><a class="dropdown-item" href="router2.php?action=residenceReadAll">Liste des résidences</a></li>
