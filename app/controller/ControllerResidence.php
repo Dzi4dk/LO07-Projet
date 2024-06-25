@@ -5,6 +5,7 @@ if(session_status() == PHP_SESSION_NONE){
 }
 
 require_once '../model/ModelResidence.php';
+require_once '../model/ModelCompte.php';
 
 class ControllerResidence {
 
@@ -35,24 +36,31 @@ class ControllerResidence {
  
  // --- Formulaire pour achat residence
     public static function achatResidence() {
-        $results = ModelResidence::getAllUserResidence($_SESSION['user_id']);
+        $results = ModelResidence::getAllNotUserResidence($_SESSION['user_id']);
         include 'config.php';
         $vue = $root . '/app/view/residence/viewAchatResidence.php';
         require ($vue);
     }
     
     public static function achatEffectue() {
-        $nom_residence = ModelResidence::getLabelForResidence(isset($_GET['residence']));
-        $prix_residence = ModelResidence::getPrixForResidence(isset($_GET['residence']));
-        $id_vendeur = ModelResidence::getIdForResidence(isset($_GET['residence']));
+    $residenceId = $_GET['residence'];
+    $nom_residence = ModelResidence::getLabelForResidence($residenceId);
+    $prix_residence = ModelResidence::getPrixForResidence($residenceId);
+    $id_vendeur = ModelResidence::getIdForResidence($residenceId);
+
+    if (isset($_GET['compte_1_id'], $_GET['compte_2_id'], $_GET['montant'])) {
         $results[0] = ModelCompte::transfert($_GET['compte_1_id'], $_GET['compte_2_id'], $_GET['montant']);
-        $results[1] = ModelCompte::getAllCompteId($id_vendeur);
-        $results[2] = ModelCompte::getAllCompteId($_SESSION['user_id']);
-        
-        include 'config.php';
-        $vue = $root . '/app/view/residence/viewAchatResidence2.php';
-        require ($vue);
+    } else {
+        echo "Erreur : les paramètres nécessaires ne sont pas définis.";
     }
+
+    $results[1] = ModelCompte::getAllCompteIdPersonne($id_vendeur);
+    $results[2] = ModelCompte::getAllCompteIdPersonne($_SESSION['user_id']);
+
+    include 'config.php';
+    $vue = $root . '/app/view/residence/viewAchatResidence2.php';
+    require ($vue);
+}
 }
 ?>
 <!-- ----- fin ControllerResidence -->

@@ -1,4 +1,4 @@
-<!-- ----- début viewAll -->
+<!-- ----- début viewAllResidenceUser -->
 <?php
 if(session_status() == PHP_SESSION_NONE){
     // Start Session it is not started yet
@@ -44,7 +44,7 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
 
   <?php include $root . '/app/view/fragment/fragmentCaveFooter.html'; ?>
 </body>
-  <!-- ----- fin viewAll -->
+
   
   
   
