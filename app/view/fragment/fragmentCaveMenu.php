@@ -49,6 +49,14 @@ if(session_status() == PHP_SESSION_NONE){
             <li><a class="dropdown-item" href="router2.php?action=residenceReadAllUser">Liste de mes résidences</a></li>
             <li><a class="dropdown-item" href="router2.php?action=achatResidence">Achat de nouvelle résidence</a></li>
           </ul>
+        </li>
+        
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mon patrimoine</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="router2.php?action=patrimoineReadAllUser">Bilan patrimoine</a></li>
+          </ul>
         </li>';?>
           
         
