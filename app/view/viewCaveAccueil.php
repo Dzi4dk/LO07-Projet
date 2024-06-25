@@ -9,6 +9,9 @@
         $_SESSION['justLogged'] = false;
     }
     include 'fragment/fragmentCaveMenu.php';
+    if ($_SESSION['parrain']){
+        include 'fragment/fragmentParrain.php';
+    }
     include 'fragment/fragmentCaveJumbotron.html';
     ?>
   </div>   

@@ -5,6 +5,7 @@ if(session_status() == PHP_SESSION_NONE){
     session_start();
 }
 require_once '../model/ModelPersonne.php';
+require_once '../model/ModelParrainage.php';
 
 class ControllerPersonne {
  // --- Liste des clients
@@ -93,7 +94,9 @@ class ControllerPersonne {
      $nom = $_GET['nom'];
      $password = $_GET['password'];
      $login = $_GET['login'];
+     $parrainage = $_GET['parrainage'];
      $results = ModelPersonne::isRegistered($prenom, $nom, $password, $login);
+     
      
      if ($results != NULL) {
          
@@ -101,6 +104,13 @@ class ControllerPersonne {
          $_SESSION['statut'] = 1;
          $_SESSION['prenom'] = $prenom;
          $_SESSION['nom'] = $nom;
+         
+         //On effectue le parrainage
+         $infoParrain = ModelParrainage::parrainer($parrainage);
+         
+         if ($infoParrain){
+             $_SESSION['parrain'] = $infoParrain;
+         }
          
          
          $_SESSION['justLogged'] = true;

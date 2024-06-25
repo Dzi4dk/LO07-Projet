@@ -57,6 +57,13 @@ if(session_status() == PHP_SESSION_NONE){
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="router2.php?action=patrimoineReadAllUser">Bilan patrimoine</a></li>
           </ul>
+        </li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Parrainer un proche</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="router2.php?action=parrainCreate">Je parraine un proche</a></li>
+          </ul>
         </li>';?>
           
         

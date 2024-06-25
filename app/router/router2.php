@@ -6,6 +6,7 @@ require ('../controller/ControllerPersonne.php');
 require ('../controller/ControllerCompte.php');
 require ('../controller/ControllerResidence.php');
 require ('../controller/ControllerPatrimoine.php');
+require ('../controller/ControllerParrainage.php');
 //require ('../controller/ControllerEmail.php');
 
 // --- récupération de l'action passée dans l'URL
@@ -77,6 +78,13 @@ switch ($action) {
  case "patrimoineReadAllUser" :
      
      ControllerPatrimoine::$action($args);
+     break;
+ 
+    //Parrainage
+ case "parrainCreate" :
+ case "parrainCreated" :
+     
+     ControllerParrainage::$action($args);
      break;
     
 
