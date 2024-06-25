@@ -134,7 +134,7 @@ public function getId() {
         }
     }
     
-    public static function getIdForResidence(){
+    public static function getIdForResidence($id){
         try {
             $database = Model::getInstance();
             $query = "SELECT personne_id FROM residence WHERE id = :residence_id";
@@ -148,10 +148,24 @@ public function getId() {
         }
     }
     
-    public static function getLabelForResidence(){
+    public static function getLabelForResidence($id){
         try {
             $database = Model::getInstance();
             $query = "SELECT label FROM residence WHERE id = :residence_id";
+            $statement = $database->prepare($query);
+            $statement->execute(['residence_id' => $residenceId]);
+            $id_vendeur = $statement->fetch(PDO::FETCH_ASSOC);
+            return $id_vendeur;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+    
+    public static function getPrixForResidence($id){
+        try {
+            $database = Model::getInstance();
+            $query = "SELECT prix FROM residence WHERE id = :residence_id";
             $statement = $database->prepare($query);
             $statement->execute(['residence_id' => $residenceId]);
             $id_vendeur = $statement->fetch(PDO::FETCH_ASSOC);

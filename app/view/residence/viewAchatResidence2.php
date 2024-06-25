@@ -9,12 +9,12 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
     include $root . '/app/view/fragment/fragmentCaveJumbotron.html';
 
 
-    echo "<h2 style='color: red;'>Achat de la résidence " . $ </h2>";
+    echo "<h2 style='color: red;'>Achat de la résidence " . $nom_residence . "</h2>";
 ?>
     <form role="form" method='get' action='router2.php'>
       <div class="form-group">
         <input type="hidden" name='action' value='compteTransfered'>        
-        <label for="compte_select" required>Compte d'où part le transfert : </label>
+        <label for="compte_select" required>Compte d'où part le transfert :</label>
         <select class="form-control" id="compte_1_id" name="compte_1_id" style="width: 300px">
           <option value="">Sélectionnez un compte</option>
           <?php
@@ -25,7 +25,6 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
           ?>
           
         </select><br>
-        <label for="id">Montant :</label><input type="number" name="montant" min="10" max="<?php $value_montant ?>" class="form-control" placeholder="10€ mini" required><br>
         
         <label for="compte_select" required>Compte où arrive le transfert : </label>
         <select class="form-control" id="compte_2_id" name="compte_2_id" style="width: 300px">
@@ -37,8 +36,9 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
             }
           ?>
       </select><br>
+      <label for="id">Prix de la résidence :</label><input type="number" name="montant"<?php $prix_residence ?>" class="form-control" required><br>
       <p/>
-      <button class="btn btn-primary" type="submit">Transférer</button>
+      <button class="btn btn-primary" type="submit">Valider</button>
     </form>
   </div>
 
