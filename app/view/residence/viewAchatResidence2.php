@@ -1,3 +1,4 @@
+<!-- ----- début viewAchatResidence2 -->
 <?php
 require ($root . '/app/view/fragment/fragmentCaveHeader.html');
 ?>
@@ -8,39 +9,38 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
     include $root . '/app/view/fragment/fragmentCaveMenu.php';
     include $root . '/app/view/fragment/fragmentCaveJumbotron.html';
 
-
-    echo "<h2 style='color: red;'>Achat de la résidence " . $nom_residence . "</h2>";
-?>
+    echo "<h2 style='color: red;'>Achat de la résidence " . htmlspecialchars($nom_residence) . "</h2>";
+    ?>
     <form role="form" method='get' action='router2.php'>
       <div class="form-group">
-        <input type="hidden" name='action' value='compteTransfered'>        
-        <label for="compte_select" required>Compte d'où part le transfert :</label>
+        <input type="hidden" name='action' value='compteTransfered'>
+
+        <label for="compte_1_id" required>Sélectionnez un compte de l'acheteur</label>
         <select class="form-control" id="compte_1_id" name="compte_1_id" style="width: 300px">
-          <option value="">Sélectionnez un compte</option>
           <?php
-          foreach ($results as $element) {
-            printf("<option value='%d'>%s : Montant : %s €</option>",
-              $element->getId(), $element->getLabel(), $value_montant = $element->getMontant());
-            }
+          foreach ($results[2] as $element) {
+            printf("<option value='%d'>%s</option>", $element->getId(), $element->getLabel());
+          }
           ?>
-          
         </select><br>
-        
-        <label for="compte_select" required>Compte où arrive le transfert : </label>
+
+        <label for="compte_2_id" required>Sélectionnez un compte du vendeur</label>
         <select class="form-control" id="compte_2_id" name="compte_2_id" style="width: 300px">
-          <option value="">Sélectionnez un compte</option>
           <?php
-          foreach ($results as $element) {
-            printf("<option value='%d'>%s : Montant : %s €</option>",
-              $element->getId(), $element->getLabel(), $element->getMontant());  
-            }
+          foreach ($results[1] as $element) {
+            printf("<option value='%d'>%s</option>", $element->getId(), $element->getLabel());
+          }
           ?>
-      </select><br>
-      <label for="id">Prix de la résidence :</label><input type="number" name="montant"<?php $prix_residence ?>" class="form-control" required><br>
-      <p/>
-      <button class="btn btn-primary" type="submit">Valider</button>
+        </select><br>
+
+        <label for="montant">Prix de la résidence :</label>
+        <input type="number" class="form-control" id="montant" name="montant" value="<?php echo htmlspecialchars($prix_residence); ?>" readonly required><br>
+
+        <button class="btn btn-primary" type="submit">Valider</button>
+      </div>
     </form>
   </div>
 
   <?php include $root . '/app/view/fragment/fragmentCaveFooter.html'; ?>
 </body>
+<!-- ----- fin viewAchatResidence2 -->
