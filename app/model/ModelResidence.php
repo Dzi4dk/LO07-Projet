@@ -176,20 +176,33 @@ public static function getPrixForResidence($residenceId){
     }
 }
 
-public static function updateProprietaire($residence_id, $new_proprietaire_id) {
+public static function updateProprietaire($id_residence, $id_nouveau_proprietaire) {
+    $database = Model::getInstance();
+
     try {
-        $database = Model::getInstance();
-        $query = "UPDATE residence SET personne_id = :new_proprietaire_id WHERE id = :residence_id";
+        // On lance la transaction
+        $database->beginTransaction();
+
+        // On met à jour le propriétaire de la résidence
+        $query = "UPDATE residence SET personne_id = :id_nouveau_proprietaire WHERE id = :id_residence";
         $statement = $database->prepare($query);
-        $statement->bindValue(':residence_id', $residence_id);
-        $statement->bindValue(':new_proprietaire_id', $new_proprietaire_id);
-        $statement->execute();
-        return $statement->rowCount() > 0;
-    } catch (PDOException $e) {
-        printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-        return false;
+        $statement->execute([
+            'id_residence' => $id_residence,
+            'id_nouveau_proprietaire' => $id_nouveau_proprietaire
+        ]);
+
+        // Fin de la transaction
+        $database->commit();
+
+        return 0;
+    } catch (PDOException $error) {
+        // Annulation de la transaction en cas d'erreur
+        $database->rollBack();
+        echo "Erreur : " . $error->getMessage();
+        return 1;
     }
 }
+
 
 
 }

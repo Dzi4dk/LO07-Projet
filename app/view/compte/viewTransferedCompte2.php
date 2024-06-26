@@ -16,7 +16,7 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
         echo "<h2 style='color: green;'>Le transfert a bien été effectué</h2>";
         echo "<table class='table table-striped table-bordered'>";
         echo "<thead><tr>";
-        echo "<th scope='col'>Label</th>";
+        echo "<th scope='col'>Mon compte</th>";
         echo "<th scope='col'>Nouveau montant</th>";
         echo "</tr></thead>";
         echo "<tbody>";
@@ -25,10 +25,6 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
             printf("<tr><td>%s</td><td>%d</td></tr>", $element->getLabel(), 
              $element->getMontant());         
         }           
-        foreach ($results[2] as $element){
-            printf("<tr><td>%s</td><td>%d</td></tr>", $element->getLabel(), 
-             $element->getMontant());         
-        }
 
         echo "</tbody></table>";
     } elseif ($results[0] == 1) {

@@ -51,14 +51,16 @@ class ControllerResidence {
     if (isset($_GET['compte_1_id'], $_GET['compte_2_id'], $_GET['montant'])) {
         $transfert = ModelCompte::transfert($_GET['compte_1_id'], $_GET['compte_2_id'], $_GET['montant']);
         if ($transfert === 0) {
+            $results[1] = ModelCompte::getAllCompteIdPersonne($id_vendeur);
+            $results[2] = ModelCompte::getAllCompteIdPersonne($_SESSION['user_id']);
             ModelResidence::updateProprietaire($residenceId, $_SESSION['user_id']);
+            Model::commit();
         }
     } else {
         echo "Erreur : les paramètres nécessaires ne sont pas définis.";
     }
 
-    $results[1] = ModelCompte::getAllCompteIdPersonne($id_vendeur);
-    $results[2] = ModelCompte::getAllCompteIdPersonne($_SESSION['user_id']);
+    
 
     include 'config.php';
     $vue = $root . '/app/view/residence/viewAchatResidence2.php';

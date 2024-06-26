@@ -61,6 +61,7 @@ switch ($action) {
  case "compteCreated" :    
  case "compteTransfert" :
  case "compteTransfered" :
+     case "compteTransfered2" :
 
   ControllerCompte::$action($args);
   break;
