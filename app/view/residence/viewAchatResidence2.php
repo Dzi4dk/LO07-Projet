@@ -13,25 +13,29 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
     ?>
     <form role="form" method='get' action='router2.php'>
       <div class="form-group">
-        <input type="hidden" name='action' value='compteTransfered'>
+        <input type="hidden" name='action' value='compteTransfered2'>
 
         <label for="compte_1_id" required>Sélectionnez un compte de l'acheteur</label>
-        <select class="form-control" id="compte_1_id" name="compte_1_id" style="width: 300px">
-          <?php
-          foreach ($results[2] as $element) {
-            printf("<option value='%d'>%s</option>", $element->getId(), $element->getLabel());
-          }
-          ?>
-        </select><br>
+<select class="form-control" id="compte_1_id" name="compte_1_id" style="width: 300px" required>
+  <?php if (empty($results[2])): ?>
+    <option disabled>Aucun compte disponible. Le transfert est impossible.</option>
+  <?php else: ?>
+    <?php foreach ($results[2] as $element): ?>
+      <option value="<?= $element->getId() ?>"><?= $element->getLabel() ?></option>
+    <?php endforeach; ?>
+  <?php endif; ?>
+</select><br>
 
-        <label for="compte_2_id" required>Sélectionnez un compte du vendeur</label>
-        <select class="form-control" id="compte_2_id" name="compte_2_id" style="width: 300px">
-          <?php
-          foreach ($results[1] as $element) {
-            printf("<option value='%d'>%s</option>", $element->getId(), $element->getLabel());
-          }
-          ?>
-        </select><br>
+<label for="compte_2_id" required>Sélectionnez un compte du vendeur</label>
+<select class="form-control" id="compte_2_id" name="compte_2_id" style="width: 300px" required>
+  <?php if (empty($results[1])): ?>
+    <option disabled>Aucun compte disponible. Le transfert est impossible.</option>
+  <?php else: ?>
+    <?php foreach ($results[1] as $element): ?>
+      <option value="<?= $element->getId() ?>"><?= $element->getLabel() ?></option>
+    <?php endforeach; ?>
+  <?php endif; ?>
+</select><br>
 
         <label for="montant">Prix de la résidence :</label>
         <input type="number" class="form-control" id="montant" name="montant" value="<?php echo htmlspecialchars($prix_residence); ?>" readonly required><br>
