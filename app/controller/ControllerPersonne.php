@@ -105,16 +105,18 @@ class ControllerPersonne {
          $_SESSION['prenom'] = $prenom;
          $_SESSION['nom'] = $nom;
          
-         //On effectue le parrainage
+         if ($parrainage){
+             //On effectue le parrainage
          $infoParrain = ModelParrainage::parrainer($parrainage);
          
          if ($infoParrain){
              foreach ($infoParrain as $element){
                  $_SESSION['prenom_parrain'] = $element->getPrenomParrain();
                  $_SESSION['nom_parrain'] = $element->getNomParrain();
-             }
-             
+             }             
          }
+         }
+         
          
          
          $_SESSION['justLogged'] = true;
@@ -146,6 +148,8 @@ class ControllerPersonne {
         $_SESSION['statut'] = 3; //Statut comme déconnecté         
         $_SESSION['prenom'] = NULL;
         $_SESSION['nom'] = NULL;
+        $_SESSION['prenom_parrain'] = NULL;
+        $_SESSION['nom_parrain'] = NULL;
         
         // ----- Construction chemin de la vue
         include 'config.php';
