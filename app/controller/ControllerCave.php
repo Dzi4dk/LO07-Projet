@@ -1,7 +1,7 @@
 
 <!-- ----- debut ControllerCave -->
 <?php
-require_once '../model/ModelVin.php';
+
 
 class ControllerCave {
     
@@ -17,7 +17,7 @@ class ControllerCave {
   public static function mesPropositions() {
       // ----- Construction chemin de la vue
   include 'config.php';
-  $vue = $root . '/public/documentation/mesPropositions.php';
+  $vue = $root . '/app/view/mesPropositions.php';
   if (DEBUG)
    echo ("ControllerCave : mesPropositions : vue = $vue");
   require ($vue);

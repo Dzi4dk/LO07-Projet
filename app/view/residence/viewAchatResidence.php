@@ -13,7 +13,7 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
 
     <form role="form" method='get' action='router2.php'>
       <div class="form-group">
-        <input type="hidden" name='action' value='achatEffectue'>        
+        <input type="hidden" name='action' value='achatEnCours'>        
         <label for="compte_select" required>Sélectionner une résidence</label>
         <select class="form-control" id="residence" name="residence" style="width: 300px">
           <?php

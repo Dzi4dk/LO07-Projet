@@ -70,6 +70,7 @@ switch ($action) {
  case "residenceReadAll" : 
  case "residenceReadAllUser" :
  case "achatResidence"  :
+ case "achatEnCours"  :
  case "achatEffectue"  :
 
   ControllerResidence::$action($args);
@@ -86,6 +87,11 @@ switch ($action) {
  case "parrainCreated" :
      
      ControllerParrainage::$action($args);
+     break;
+ 
+     //Cave
+ case "mesPropositions"  :
+     ControllerCave::$action();
      break;
     
 

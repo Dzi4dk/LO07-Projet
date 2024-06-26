@@ -12,7 +12,7 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
 
     <!-- Affichage du message de confirmation -->
     <?php
-    if ($results[0] == 0) {
+    if ($transfert == 0) {
         echo "<h2 style='color: green;'>Le transfert a bien été effectué</h2>";
         echo "<table class='table table-striped table-bordered'>";
         echo "<thead><tr>";
@@ -23,13 +23,13 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
         
         foreach ($results[1] as $element){
             printf("<tr><td>%s</td><td>%d</td></tr>", $element->getLabel(), 
-             $element->getMontant());         
+                    $element->getMontant());         
         }           
 
         echo "</tbody></table>";
-    } elseif ($results[0] == 1) {
+    } elseif ($transfert == 1) {
         echo "<h2 style='color: red;'>Erreur lors de la transaction.</h2></br>";
-    } elseif ($results[0] == 2) {
+    } elseif ($transfert == 2) {
         echo "<h2 style='color: red;'>Erreur lors de la transaction : vous essayez de transférer plus d'argent qu'il n'y a sur le compte.</h2></br>";
     }
     ?>

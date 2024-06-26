@@ -13,7 +13,9 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
     ?>
     <form role="form" method='get' action='router2.php'>
       <div class="form-group">
-        <input type="hidden" name='action' value='compteTransfered2'>
+          <input type="hidden" name="residence" value="<?= htmlspecialchars($residenceId) ?>">
+          
+        <input type="hidden" name='action' value='achatEffectue'>
 
         <label for="compte_1_id" required>Sélectionnez un compte de l'acheteur</label>
 <select class="form-control" id="compte_1_id" name="compte_1_id" style="width: 300px" required>

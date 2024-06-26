@@ -71,8 +71,8 @@ if(session_status() == PHP_SESSION_NONE){
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Innovations</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="router2.php?action=emailForm">Nous contacter</a></li>
-            <li><a class="dropdown-item" href="router2.php?action=vinReadId&target=vinReadOne">Innovation du code MVC</a></li>
+            <li><a class="dropdown-item" href="router2.php?action=">Parrainer un proche (connectez vous en tant qu'utilisateur)</a></li>
+            <li><a class="dropdown-item" href="router2.php?action=mesPropositions">Amélioration du code MVC</a></li>
           </ul>
         </li>
         
@@ -85,13 +85,6 @@ if(session_status() == PHP_SESSION_NONE){
               <?php if ($_SESSION['statut'] == 0 or $_SESSION['statut'] == 1) echo
                   '<li><a class="dropdown-item" href="router2.php?action=personneDisconnect">Déconnexion</a></li>'; ?>            
  
-          </ul>
-        </li>
-        
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">DOCUMENTATION</a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="router2.php?action=mesPropositions">Propositions d'améliorations</a></li>
           </ul>
         </li>
       </ul>
