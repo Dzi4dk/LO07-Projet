@@ -27,25 +27,25 @@ $totalPatrimoine = 0;
 
         foreach ($results[0] as $compte) {
             echo "<tr>";
-            echo "<td>" . "Compte" . "</td>";
-            echo "<td>" . htmlspecialchars($compte->getCompteLabel()) . "</td>";
-            echo "<td style='text-align: right;'>" . number_format($compte->getCompteMontant(), 2, ',', ' ') . "</td>";
+            echo "<td style='background-color: lightblue;'>" . "Compte" . "</td>";
+            echo "<td style='background-color: lightblue;'>" . htmlspecialchars($compte->getCompteLabel()) . "</td>";
+            echo "<td style='background-color: lightblue; text-align: right;'>" . number_format($compte->getCompteMontant(), 2, ',', ' ') . "</td>";
             echo "</tr>";
             $totalPatrimoine += $compte->getCompteMontant();
         }
         
         foreach ($results[1] as $residence) {
-            echo "<tr>";
-            echo "<td>" . "Résidence" . "</td>";
-            echo "<td>" . htmlspecialchars($residence->getResidenceLabel()) . "</td>";
-            echo "<td style='text-align:right;'>" . number_format($residence->getPrix(), 2, ',', ' ') . "</td>";
+            echo "<tr background-color: lightgreen;>";
+            echo "<td style='background-color: lightgreen;'>" . "Résidence" . "</td>";
+            echo "<td style='background-color: lightgreen;'>" . htmlspecialchars($residence->getResidenceLabel()) . "</td>";
+            echo "<td style='background-color: lightgreen; text-align:right;'>" . number_format($residence->getPrix(), 2, ',', ' ') . "</td>";
             echo "</tr>";
             $totalPatrimoine += $residence->getPrix();
         }
 
         echo "</tbody></table>";
         
-        echo "<h2 style='color: green;'>Capital total = " . number_format($totalPatrimoine, 2, ',', ' ') . " €</h2>";
+        echo "<h2 style='color: green; font-size: 36px; background-color: lightgrey; padding: 5px;'>Capital total = " . number_format($totalPatrimoine, 2, ',', ' ') . " €</h2>";
         
     } else {
         echo "<h3 style='color: red;'>Votre patrimoine est nul.</h3>";

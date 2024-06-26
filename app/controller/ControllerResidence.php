@@ -49,7 +49,10 @@ class ControllerResidence {
     $id_vendeur = ModelResidence::getIdForResidence($residenceId);
 
     if (isset($_GET['compte_1_id'], $_GET['compte_2_id'], $_GET['montant'])) {
-        $results[0] = ModelCompte::transfert($_GET['compte_1_id'], $_GET['compte_2_id'], $_GET['montant']);
+        $transfert = ModelCompte::transfert($_GET['compte_1_id'], $_GET['compte_2_id'], $_GET['montant']);
+        if ($transfert === 0) {
+            ModelResidence::updateProprietaire($residenceId, $_SESSION['user_id']);
+        }
     } else {
         echo "Erreur : les paramètres nécessaires ne sont pas définis.";
     }

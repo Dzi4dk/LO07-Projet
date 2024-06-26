@@ -175,6 +175,23 @@ public static function getPrixForResidence($residenceId){
         return NULL;
     }
 }
+
+public static function updateProprietaire($residence_id, $new_proprietaire_id) {
+    try {
+        $database = Model::getInstance();
+        $query = "UPDATE residence SET personne_id = :new_proprietaire_id WHERE id = :residence_id";
+        $statement = $database->prepare($query);
+        $statement->bindValue(':residence_id', $residence_id);
+        $statement->bindValue(':new_proprietaire_id', $new_proprietaire_id);
+        $statement->execute();
+        return $statement->rowCount() > 0;
+    } catch (PDOException $e) {
+        printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+        return false;
+    }
+}
+
+
 }
 ?>
 <!-- ----- fin ModelResidence -->
