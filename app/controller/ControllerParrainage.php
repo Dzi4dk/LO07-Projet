@@ -20,7 +20,7 @@ class ControllerParrainage {
     
      // --- Formulaire pour créer un parrain
     public static function parrainCreated() {
-        $results = ModelParrainage::createParrain($_GET['compte_id']);
+        $results = ModelParrainage::createParrain($_GET['compte_id'], $_SESSION['nom'], $_SESSION['prenom']);
         include 'config.php';
         $vue = $root . '/app/view/parrainage/viewCreatedParrain.php';
         require ($vue);
@@ -28,5 +28,3 @@ class ControllerParrainage {
 }
 ?>
 <!-- ----- fin ControllerCompte -->
-
-

@@ -109,7 +109,11 @@ class ControllerPersonne {
          $infoParrain = ModelParrainage::parrainer($parrainage);
          
          if ($infoParrain){
-             $_SESSION['parrain'] = $infoParrain;
+             foreach ($infoParrain as $element){
+                 $_SESSION['prenom_parrain'] = $element->getPrenomParrain();
+                 $_SESSION['nom_parrain'] = $element->getNomParrain();
+             }
+             
          }
          
          

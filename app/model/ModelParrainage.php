@@ -8,15 +8,17 @@ if(session_status() == PHP_SESSION_NONE){
 require_once 'Model.php';
 
 class ModelParrainage {
- private $id_compte_parrain, $code;
+ private $id_compte_parrain, $code, $nom_parrain, $prenom_parrain;
  
 
  // pas possible d'avoir 2 constructeurs
- public function __construct($id_compte_parrain = NULL, $code = NULL) {
+ public function __construct($id_compte_parrain = NULL, $code = NULL, $nom_parrain = NULL, $prenom_parrain = NULL) {
   // valeurs nulles si pas de passage de parametres
   if (!is_null($id_compte_parrain)) {
    $this->id_compte_parrain = $id_compte_parrain;
    $this->code = $code;
+   $this->nom_parrain = $nom_parrain;
+   $this->prenom_parrain = $prenom_parrain;
   }
  }
  
@@ -31,12 +33,19 @@ class ModelParrainage {
   return $this->id_compte_parrain;
  }
  
+ function getPrenomParrain() {
+  return $this->prenom_parrain;
+ }
+ 
+ function getNomParrain() {
+  return $this->nom_parrain;
+ }
 
  //Function
  
 
       // Ajouter un nouveau parrain
- public static function createParrain($id_compte_parrain) {
+ public static function createParrain($id_compte_parrain, $nom_parrain, $prenom_parrain) {
   try {
    $montant = 0;
    $database = Model::getInstance();
@@ -55,11 +64,13 @@ class ModelParrainage {
    
    $code = $pass;
    
-   $query = "INSERT INTO parrainage value (:id_compte_parrain, :code)";
+   $query = "INSERT INTO parrainage value (:id_compte_parrain, :code, :nom_parrain, :prenom_parrain)";
    $statement = $database->prepare($query);
    $statement->execute([
        'id_compte_parrain' => $id_compte_parrain,
-       'code' => $code
+       'code' => $code,
+       'nom_parrain' => $nom_parrain,
+       'prenom_parrain' => $prenom_parrain
    ]);
    return $code;
   } catch (PDOException $e) {
@@ -68,18 +79,18 @@ class ModelParrainage {
   }
  }
  
-  // Prrainer un compte
+  // Parrainer un compte
  public static function parrainer($parrainage) {
   try {     
    $database = Model::getInstance();
    
    //Verfier le code
-   $query = "SELECT id_compte_parrain FROM parrainage where code = :parrainage";
+   $query = "SELECT * FROM parrainage where code = :parrainage";
    $statement = $database->prepare($query);
    $statement->execute([
        'parrainage' => $parrainage
    ]);
-   $id_compte_parrain = $statement->fetchAll(PDO::FETCH_CLASS, "ModelParrainage");
+   $info_parrainage = $statement->fetchAll(PDO::FETCH_CLASS, "ModelParrainage");
    
    
    //On crée un compte courant avec 50€ dans la banque partenaire au nouvel utilisateur
@@ -110,28 +121,12 @@ class ModelParrainage {
    $query2 = "UPDATE compte SET montant = montant + :montant WHERE id = :id_compte_parrain;";
    $statement = $database->prepare($query2);
    $statement->execute([
-       'id_compte_parrain' => $id_compte_parrain,
+       'id_compte_parrain'  => $info_parrainage[0]->id_compte_parrain,
        'montant' => 50
            ]);
+     
    
-   //On va chercher les infos du parrain
-   $query = "SELECT personne_id FROM compte where id = :id_compte_parrain";
-   $statement = $database->prepare($query);
-   $statement->execute([
-       'id_compte_parrain' => $id_compte_parrain
-   ]);
-   $id_parrain = $statement->fetchAll(PDO::FETCH_CLASS, "ModelCompte");
-   
-   $query = "SELECT * FROM personne where id = :id_parrain";
-   $statement = $database->prepare($query);
-   $statement->execute([
-       'id_parrain' => $id_parrain
-   ]);
-   $info_parrain = $statement->fetchAll(PDO::FETCH_CLASS, "ModelPersonne");
-
-   
-   
-   return $info_parrain;
+   return $info_parrainage;
    
   } catch (PDOException $e) {
    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
