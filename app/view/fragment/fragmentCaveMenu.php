@@ -5,8 +5,9 @@ if(session_status() == PHP_SESSION_NONE){
     session_start();
 }?>
 
-<nav class="navbar navbar-expand-lg fixed-top" style="background-color: #ffc107;">
+<nav class="navbar navbar-expand-lg fixed-top" style="background-color: #cc66ff">
   <div class="container-fluid">
+    <img src="../../public/documentation/logo.png" alt="Logo" width="40" height="40" style="margin-right: 10px;">
     <a class="navbar-brand" href="router2.php?action=CaveAccueil">CHABANNES - DELHOMME | <?php if ($_SESSION['statut'] == 0) echo "Admin | " . $_SESSION['nom'] . " " . $_SESSION['prenom'];?> <?php if ($_SESSION['statut'] == 1) echo "Client | " . $_SESSION['nom'] . " " . $_SESSION['prenom'];?> <?php if ($_SESSION['statut'] == 3) echo "Utilisateur non connecté | ";?></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,17 +77,25 @@ if(session_status() == PHP_SESSION_NONE){
           </ul>
         </li>
         
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Connexion</a>
-          <ul class="dropdown-menu">
-              <?php if ($_SESSION['statut'] == 3) echo 
-                  '<li><a class="dropdown-item" href="router2.php?action=personneShowLogin">Login</a></li>
-                   <li><a class="dropdown-item" href="router2.php?action=personneShowRegister">Register</a></li>'; ?>
-              <?php if ($_SESSION['statut'] == 0 or $_SESSION['statut'] == 1) echo
-                  '<li><a class="dropdown-item" href="router2.php?action=personneDisconnect">Déconnexion</a></li>'; ?>            
- 
-          </ul>
-        </li>
+        <div class="d-flex justify-content-end">
+            <li class="nav-item">
+                <?php if ($_SESSION['statut'] == 3) { ?>
+                    <button type="button" class="btn btn-primary me-2" onclick="window.location.href='router2.php?action=personneShowLogin'">Login</button>
+                    <button type="button" class="btn btn-secondary" onclick="window.location.href='router2.php?action=personneShowRegister'">Register</button>
+                <?php } else if ($_SESSION['statut'] == 0 || $_SESSION['statut'] == 1) { ?>
+                    <button type="button" class="btn btn-danger" onclick="window.location.href='router2.php?action=personneDisconnect'">Déconnexion</button>
+                <?php } ?>
+            </li>
+        </div>
+
+<style>
+.d-flex {
+    position: fixed;
+    right: 10px;
+    z-index: 1000;
+}
+</style>
+
       </ul>
     </div>
   </div>

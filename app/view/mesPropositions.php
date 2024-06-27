@@ -10,13 +10,13 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
       include $root . '/app/view/fragment/fragmentCaveJumbotron.html';
       ?>
 
-      <h4>Amélioration 1</h4><br/>
+      <br/><h4>Amélioration 1</h4><br/>
       
-      On ne pouvait pas guet une valeur au sein d'un même model ce qui nous a posé quelques problèmes même si on a pu les contourner<br/>
+      On ne pouvait pas vraiment get une valeur au sein d'un même model ce qui nous a posé quelques problèmes même si on a pu les contourner<br/><br/>
       
       <h4>Amélioration 2</h4><br/>
       
-      Les mots de passe ne sont pas hashés ce qui augmentent très fortement les failles de sécurité. Cette amélioration ne concerne pas forcément notre modèle MVC mais plutôt notre projet en général.<br/><br/>
+      Les mots de passe ne sont pas hashés, ce qui n'est pas otpimal au niveau de la sécurité. Cette amélioration ne concerne pas forcément notre modèle MVC mais plutôt notre projet en général.<br/><br/>
       
       <h4>Amélioration 3</h4><br/>
       
@@ -24,7 +24,7 @@ require ($root . '/app/view/fragment/fragmentCaveHeader.html');
       
       <h4>Amélioration 4</h4><br/>
       
-      On aurait pu réutiliser des vues probablement. Dans notre projet c'était pas forcément très intéressant, mais pour des projets beaucoup plus gros, où on print plus de fois la même chose (une liste de comptes par exemple) il est intéressant d'utiliser des vues partielles (fragments) comme on a fait avec fragmentCaveFooter...<br/><br/>
+      On aurait pu réutiliser des vues probablement. Dans notre projet c'était pas forcément très intéressant, mais pour des projets beaucoup plus gros, où on print plus de fois la même chose (une liste de comptes par exemple) il est intéressant d'utiliser des vues partielles (fragments) comme on a fait avec fragmentCaveFooter...
       
   </div>
   <?php include $root . '/app/view/fragment/fragmentCaveFooter.html'; ?>

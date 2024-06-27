@@ -1,7 +1,7 @@
  
 <!-- ----- debut de la page cave_acceuil -->
 <?php include 'fragment/fragmentCaveHeader.html'; ?>
-<body>
+<body id="body-cave-accueil">
   <div class="container">
     <?php
     if ($_SESSION['justLogged']){
@@ -24,4 +24,10 @@
   <!-- ----- fin de la page cave_acceuil -->
 
 </body>
+<style>
+#body-cave-accueil {
+  background-image: url('');
+  background-size: cover;
+}
+</style>
 </html>
